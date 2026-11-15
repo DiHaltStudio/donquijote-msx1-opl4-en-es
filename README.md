@@ -84,4 +84,6 @@ MSX-DOS adaptation, OPL4 narration integration, fast drawing loads, linked parts
 
 An unofficial adaptation made for study, preservation and homage, without affiliation with the original authors or publisher. The original adventure, text and artwork remain the property of their respective rights holders. MSX and other trademarks belong to their respective owners. No rights to the original game are granted by this repository.
 
+Please fork or push PR if you want to improve this game!
+
 Tools include Python, sjasm, Pillow, Tectonic/LaTeX, openMSX and Piper. See [voice attribution](VOICE-NOTICE.txt) and [manual sources](docs/manual/SOURCES.md).
