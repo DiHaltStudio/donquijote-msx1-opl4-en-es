@@ -1,0 +1,18 @@
+Prepared narration assets
+
+Spanish: Davefx, es_ES-davefx-medium, Piper.
+Model source: https://huggingface.co/rhasspy/piper-voices/tree/main/es/es_ES/davefx/medium
+The model card identifies its dataset as CC0:
+https://github.com/OHF-Voice/voice-datasets
+
+English: Northern English Male, en_GB-northern_english_male-medium, Piper.
+Model source: https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_GB/northern_english_male/medium
+Dataset: https://www.openslr.org/83/
+The model card identifies the dataset license as Creative Commons
+Attribution-ShareAlike 4.0 International:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The prepared banks use contextual sample blocks, resampled to 8 kHz and
+quantized to signed 8-bit PCM, with shared units and timing scores.
+Preserve this attribution when redistributing the narration assets.
+The voice dataset notices do not grant rights to the original game's text.

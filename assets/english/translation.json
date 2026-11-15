@@ -1,0 +1,1520 @@
+{
+  "messages": [
+    {
+      "id": "a_room_001",
+      "text": "Dusty books line a shelf to your left. A doorway leads south."
+    },
+    {
+      "id": "a_room_002",
+      "text": "Your room is plain, as befits a sixteenth-century gentleman of La Mancha. Stairs lead down. You can also go north."
+    },
+    {
+      "id": "a_room_003",
+      "text": "In the dim light from the door you see a chest. Dust conceals memories of your ancestors. You can go south."
+    },
+    {
+      "id": "a_room_004",
+      "text": "Only a forlorn cupboard remains in this old, cosy kitchen. Doors lead south and north."
+    },
+    {
+      "id": "a_room_005",
+      "text": "You are in the entrance hall. A wide staircase leads upstairs. You can go up, north, south or east."
+    },
+    {
+      "id": "a_room_006",
+      "text": "A candle lights your gateway to a new life. The gate is east; another door lies west."
+    },
+    {
+      "id": "a_room_007",
+      "text": "You are in your simple dining room. A wooden table stands here. Something hangs on the wall. A door leads north."
+    },
+    {
+      "id": "a_room_032",
+      "text": "Argamansilla del Alba, your village. Its empty streets lie silent. What does the notice on the wall say? Streets lead east and south."
+    },
+    {
+      "id": "a_room_034",
+      "text": "The plains of La Mancha lie far to the south. Is this the last street in the village?"
+    },
+    {
+      "id": "a_room_031",
+      "text": "You reach the arch. The forest awaits to the east, cool and mysterious. You can go west."
+    },
+    {
+      "id": "a_room_044",
+      "text": "Forest or jungle? These woods may hold great surprises. Paths lead north and west."
+    },
+    {
+      "id": "a_room_043",
+      "text": "An apple tree! What a strange forest, offering such delicious fruit. The path runs north to south."
+    },
+    {
+      "id": "a_room_042",
+      "text": "You walk through a pine wood. Tiny flowers cover the ground. You can go north, south or west."
+    },
+    {
+      "id": "a_room_041",
+      "text": "You are in a leafy wood. A door lies east. The forest continues south. You can also go west."
+    },
+    {
+      "id": "a_room_022",
+      "text": "A huge stone wall blocks the path. You can go east or south."
+    },
+    {
+      "id": "a_room_021",
+      "text": "You are beyond the wall. The path ends to the south. Go east to return."
+    },
+    {
+      "id": "a_room_025",
+      "text": "You enter the barren plains of La Mancha. The village is north; another path leads west."
+    },
+    {
+      "id": "a_room_026",
+      "text": "You are still in La Mancha. An inn stands west. The path runs east to south."
+    },
+    {
+      "id": "a_room_027",
+      "text": "You are in La Mancha. Sheep stand to the east. Go north to return."
+    },
+    {
+      "id": "a_room_045",
+      "text": "A small ravine lies before you, to the west. East looks safer."
+    },
+    {
+      "id": "a_room_046",
+      "text": "You have crossed the ravine! This place looks unpleasant. East seems best."
+    },
+    {
+      "id": "a_room_014",
+      "text": "A fine bedroom, dominated by a bed. You can return east."
+    },
+    {
+      "id": "a_room_015",
+      "text": "You are on the first landing. Torchlight reveals doors to the east and west."
+    },
+    {
+      "id": "a_room_016",
+      "text": "You are in the inn's cellar. Huge wineskins stand in a corner. The exit is west."
+    },
+    {
+      "id": "a_room_017",
+      "text": "Stairs fill the room. A wall candle lights it. You can go south."
+    },
+    {
+      "id": "a_room_018",
+      "text": "You are in the inn's hall. How many guests have slept here? The main door is west; another exit lies north."
+    },
+    {
+      "id": "a_room_012",
+      "text": "A candle lights this cosy hall. Doors to the east, west and south lead through the inn."
+    },
+    {
+      "id": "a_room_013",
+      "text": "A lonely dining room lies before you. The table is bare. You can go north."
+    },
+    {
+      "id": "a_room_009",
+      "text": "Torchlight reveals two doors, north and south."
+    },
+    {
+      "id": "a_room_008",
+      "text": "An inn bedroom, complete with the customary bed. Go south to return."
+    },
+    {
+      "id": "a_room_010",
+      "text": "You are in the yard. Apart from the moon, little is visible. A door leads north."
+    },
+    {
+      "id": "a_room_080",
+      "text": "You fall into Lake Ruidera. Unable to swim, you drown."
+    },
+    {
+      "id": "a_room_033",
+      "text": "Another street! Will you go north or south?"
+    },
+    {
+      "id": "a_message_239",
+      "text": "You carry"
+    },
+    {
+      "id": "a_message_240",
+      "text": ">"
+    },
+    {
+      "id": "a_message_241",
+      "text": "You cannot."
+    },
+    {
+      "id": "a_message_242",
+      "text": "Pardon?"
+    },
+    {
+      "id": "a_message_243",
+      "text": "Press a key..."
+    },
+    {
+      "id": "a_message_244",
+      "text": "Are you sure?"
+    },
+    {
+      "id": "a_message_245",
+      "text": "You already have it."
+    },
+    {
+      "id": "a_message_246",
+      "text": "You do not have it."
+    },
+    {
+      "id": "a_message_247",
+      "text": "I cannot see it."
+    },
+    {
+      "id": "a_message_248",
+      "text": "You carry too much to take that."
+    },
+    {
+      "id": "a_message_251",
+      "text": "Too dark to see."
+    },
+    {
+      "id": "a_message_252",
+      "text": "I cannot find it anywhere."
+    },
+    {
+      "id": "a_message_253",
+      "text": "You can also see"
+    },
+    {
+      "id": "a_message_254",
+      "text": "Very good."
+    },
+    {
+      "id": "a_message_001",
+      "text": "SANCHO: \"Try a specific action.\""
+    },
+    {
+      "id": "a_message_005",
+      "text": "Specks of dirt."
+    },
+    {
+      "id": "a_message_006",
+      "text": "A book of chivalry."
+    },
+    {
+      "id": "a_message_007",
+      "text": "It is full of books."
+    },
+    {
+      "id": "a_message_008",
+      "text": "It has a curious fastening."
+    },
+    {
+      "id": "a_message_009",
+      "text": "You must begin the adventure first."
+    },
+    {
+      "id": "a_message_010",
+      "text": "You must do something else first."
+    },
+    {
+      "id": "a_message_011",
+      "text": "You are on the upper floor."
+    },
+    {
+      "id": "a_message_012",
+      "text": "Fool! Who climbs out of a window?"
+    },
+    {
+      "id": "a_message_013",
+      "text": "A stone wall."
+    },
+    {
+      "id": "a_message_014",
+      "text": "A mosaic floor."
+    },
+    {
+      "id": "a_message_015",
+      "text": "If it rains, you will get wet."
+    },
+    {
+      "id": "a_message_016",
+      "text": "The adventure begins."
+    },
+    {
+      "id": "a_message_017",
+      "text": "You put on the armour."
+    },
+    {
+      "id": "a_message_018",
+      "text": "You are already wearing it."
+    },
+    {
+      "id": "a_message_019",
+      "text": "It looks comfortable."
+    },
+    {
+      "id": "a_message_020",
+      "text": "No time for nonsense."
+    },
+    {
+      "id": "a_message_021",
+      "text": "It is already made."
+    },
+    {
+      "id": "a_message_022",
+      "text": "They are silk."
+    },
+    {
+      "id": "a_message_023",
+      "text": "A shame to unmake the bed."
+    },
+    {
+      "id": "a_message_024",
+      "text": "Among the old relics you find some armour."
+    },
+    {
+      "id": "a_message_025",
+      "text": "Nothing else of interest."
+    },
+    {
+      "id": "a_message_026",
+      "text": "You lift it, but it is too heavy. You put it down again."
+    },
+    {
+      "id": "a_message_027",
+      "text": "Too dark to see."
+    },
+    {
+      "id": "a_message_028",
+      "text": "You hear noises inside."
+    },
+    {
+      "id": "a_message_029",
+      "text": "There is a key."
+    },
+    {
+      "id": "a_message_030",
+      "text": "You already opened it."
+    },
+    {
+      "id": "a_message_031",
+      "text": "A rat leaps out and bites you. You are dead."
+    },
+    {
+      "id": "a_message_032",
+      "text": "A rat leaps out to bite you, but breaks its teeth on your armour."
+    },
+    {
+      "id": "a_message_033",
+      "text": "You put your head up the chimney. Soot falls in your face."
+    },
+    {
+      "id": "a_message_034",
+      "text": "There is a rat hole."
+    },
+    {
+      "id": "a_message_035",
+      "text": "The door is shut."
+    },
+    {
+      "id": "a_message_036",
+      "text": "It gives plenty of light."
+    },
+    {
+      "id": "a_message_037",
+      "text": "Part of the decoration."
+    },
+    {
+      "id": "a_message_038",
+      "text": "You open the door."
+    },
+    {
+      "id": "a_message_039",
+      "text": "You need a tool."
+    },
+    {
+      "id": "a_message_040",
+      "text": "A sword and shield hang on the wall."
+    },
+    {
+      "id": "a_message_003",
+      "text": "SANCHO: \"You should become a knight.\""
+    },
+    {
+      "id": "a_message_041",
+      "text": "A shield hangs on the wall."
+    },
+    {
+      "id": "a_message_042",
+      "text": "A twelfth-century shield."
+    },
+    {
+      "id": "a_message_043",
+      "text": "It is pine wood."
+    },
+    {
+      "id": "a_message_044",
+      "text": "Its steps are two and a half metres wide."
+    },
+    {
+      "id": "a_message_045",
+      "text": "The fourth one is loose."
+    },
+    {
+      "id": "a_message_046",
+      "text": "The stairs now have one step less."
+    },
+    {
+      "id": "a_message_047",
+      "text": "To be a knight, keep watch over your arms at an inn where you can see the moon."
+    },
+    {
+      "id": "a_message_048",
+      "text": "They vary in size."
+    },
+    {
+      "id": "a_message_049",
+      "text": "Dark and lonely."
+    },
+    {
+      "id": "a_message_050",
+      "text": "The walls of the houses."
+    },
+    {
+      "id": "a_message_051",
+      "text": "It is earth."
+    },
+    {
+      "id": "a_message_052",
+      "text": "You are not a ghost."
+    },
+    {
+      "id": "a_message_053",
+      "text": "You climb onto the stone."
+    },
+    {
+      "id": "a_message_054",
+      "text": "You are already up there."
+    },
+    {
+      "id": "a_message_055",
+      "text": "It is not here."
+    },
+    {
+      "id": "a_message_056",
+      "text": "Too high."
+    },
+    {
+      "id": "a_message_057",
+      "text": "They are very tall."
+    },
+    {
+      "id": "a_message_058",
+      "text": "You climb, but near the top you lose your footing and fall."
+    },
+    {
+      "id": "a_message_059",
+      "text": "Very little grows here."
+    },
+    {
+      "id": "a_message_060",
+      "text": "Just a few thistles."
+    },
+    {
+      "id": "a_message_061",
+      "text": "You try to take it, but prick yourself."
+    },
+    {
+      "id": "a_message_062",
+      "text": "You fall into the ravine."
+    },
+    {
+      "id": "a_message_063",
+      "text": "."
+    },
+    {
+      "id": "a_message_064",
+      "text": "You lay the plank across the ravine. It forms a bridge."
+    },
+    {
+      "id": "a_message_065",
+      "text": "Too wide."
+    },
+    {
+      "id": "a_message_066",
+      "text": "About two and a half metres wide."
+    },
+    {
+      "id": "a_message_067",
+      "text": "One candle is loose."
+    },
+    {
+      "id": "a_message_068",
+      "text": "The innkeeper opens the door. You enter."
+    },
+    {
+      "id": "a_message_069",
+      "text": "It is locked."
+    },
+    {
+      "id": "a_message_070",
+      "text": "You fill the bottle."
+    },
+    {
+      "id": "a_message_071",
+      "text": "They contain wine."
+    },
+    {
+      "id": "a_message_072",
+      "text": "A fine old Rioja."
+    },
+    {
+      "id": "a_message_073",
+      "text": "You might get drunk."
+    },
+    {
+      "id": "a_message_074",
+      "text": "The wine spills across the room. You have no container."
+    },
+    {
+      "id": "a_message_075",
+      "text": "Remember, you believe they are bandits."
+    },
+    {
+      "id": "a_message_076",
+      "text": "Too high."
+    },
+    {
+      "id": "a_message_077",
+      "text": "You see a death cap mushroom."
+    },
+    {
+      "id": "a_message_078",
+      "text": "It is already uprooted."
+    },
+    {
+      "id": "a_message_079",
+      "text": "You see a saffron milkcap mushroom."
+    },
+    {
+      "id": "a_message_080",
+      "text": "An apple falls."
+    },
+    {
+      "id": "a_message_081",
+      "text": "It bears apples."
+    },
+    {
+      "id": "a_message_082",
+      "text": "Nothing else falls."
+    },
+    {
+      "id": "a_message_083",
+      "text": "You have finished part one. The password is: \"THE BALM OF FIERABRAS\"."
+    },
+    {
+      "id": "a_message_084",
+      "text": "The sheep move aside."
+    },
+    {
+      "id": "a_message_085",
+      "text": "The shepherd grows angry and beats you."
+    },
+    {
+      "id": "a_message_086",
+      "text": "You think it is an army."
+    },
+    {
+      "id": "a_message_087",
+      "text": "Now bring an object that may be useful later."
+    },
+    {
+      "id": "a_message_088",
+      "text": "Pure wool."
+    },
+    {
+      "id": "a_message_089",
+      "text": "Its lock is broken."
+    },
+    {
+      "id": "a_message_090",
+      "text": "A good blow might fix it."
+    },
+    {
+      "id": "a_message_091",
+      "text": "You are a true knight now."
+    },
+    {
+      "id": "a_message_092",
+      "text": "You already did that."
+    },
+    {
+      "id": "a_message_093",
+      "text": "You try to keep vigil over your arms, but fall asleep from exhaustion."
+    },
+    {
+      "id": "a_message_094",
+      "text": "A good knight must not fall asleep."
+    },
+    {
+      "id": "a_message_095",
+      "text": "I have no arms to watch over."
+    },
+    {
+      "id": "a_message_096",
+      "text": "You see a lovely landscape."
+    },
+    {
+      "id": "a_message_097",
+      "text": "Your front door."
+    },
+    {
+      "id": "a_message_098",
+      "text": "The edge of the village."
+    },
+    {
+      "id": "a_message_099",
+      "text": "You see inside the houses."
+    },
+    {
+      "id": "a_message_100",
+      "text": "The hills are far away."
+    },
+    {
+      "id": "a_message_101",
+      "text": "A cart track."
+    },
+    {
+      "id": "a_message_102",
+      "text": "They are pine trees."
+    },
+    {
+      "id": "a_message_103",
+      "text": "You start climbing, but lose your footing and fall."
+    },
+    {
+      "id": "a_message_104",
+      "text": "They are colourful."
+    },
+    {
+      "id": "a_message_105",
+      "text": "It is an inn."
+    },
+    {
+      "id": "a_message_106",
+      "text": "It leads upstairs."
+    },
+    {
+      "id": "a_message_107",
+      "text": "A mushroom."
+    },
+    {
+      "id": "a_message_004",
+      "text": "SANCHO: \"Find something for the balm of Fierabras.\""
+    },
+    {
+      "id": "a_message_108",
+      "text": "It is red."
+    },
+    {
+      "id": "a_message_109",
+      "text": "It is dry."
+    },
+    {
+      "id": "a_message_110",
+      "text": "It is iron."
+    },
+    {
+      "id": "a_message_111",
+      "text": "Cock-a-doodle-doo!"
+    },
+    {
+      "id": "a_message_112",
+      "text": "It is calcite."
+    },
+    {
+      "id": "a_message_113",
+      "text": "It is empty."
+    },
+    {
+      "id": "a_message_114",
+      "text": "It is full of wine."
+    },
+    {
+      "id": "a_message_115",
+      "text": "The blade is sharp."
+    },
+    {
+      "id": "a_message_116",
+      "text": "Try that in another adventure."
+    },
+    {
+      "id": "a_message_117",
+      "text": "It is planted."
+    },
+    {
+      "id": "a_message_118",
+      "text": "It hangs from a tree."
+    },
+    {
+      "id": "a_message_119",
+      "text": "Many apples fall. One hits your head. You asked for it!"
+    },
+    {
+      "id": "a_message_120",
+      "text": "Speak for yourself."
+    },
+    {
+      "id": "a_message_121",
+      "text": "Night falls."
+    },
+    {
+      "id": "a_message_122",
+      "text": "Dawn breaks."
+    },
+    {
+      "id": "a_message_123",
+      "text": "You are getting hungry."
+    },
+    {
+      "id": "a_message_124",
+      "text": "You cannot last without food."
+    },
+    {
+      "id": "a_message_125",
+      "text": "Nothing unusual."
+    },
+    {
+      "id": "a_message_126",
+      "text": "I cannot fight without arms."
+    },
+    {
+      "id": "a_message_127",
+      "text": "You are not a knight yet."
+    },
+    {
+      "id": "a_message_128",
+      "text": "I cannot go that way."
+    },
+    {
+      "id": "a_message_129",
+      "text": "Delicious."
+    },
+    {
+      "id": "a_message_207",
+      "text": "Time passes..."
+    },
+    {
+      "id": "a_message_156",
+      "text": "Have some modesty."
+    },
+    {
+      "id": "a_message_157",
+      "text": "Do not be rough!"
+    },
+    {
+      "id": "a_object_001",
+      "text": "A CRUST OF BREAD"
+    },
+    {
+      "id": "a_object_002",
+      "text": "AN APPLE"
+    },
+    {
+      "id": "a_object_003",
+      "text": "A HEN"
+    },
+    {
+      "id": "a_object_004",
+      "text": "A SAFFRON MILKCAP"
+    },
+    {
+      "id": "a_object_005",
+      "text": "A DEATH CAP"
+    },
+    {
+      "id": "a_object_006",
+      "text": "A BOOK"
+    },
+    {
+      "id": "a_object_007",
+      "text": "SOME ARMOUR"
+    },
+    {
+      "id": "a_object_008",
+      "text": "A KEY"
+    },
+    {
+      "id": "a_object_009",
+      "text": "A PLANK"
+    },
+    {
+      "id": "a_object_010",
+      "text": "A SWORD"
+    },
+    {
+      "id": "a_object_011",
+      "text": "A BOTTLE"
+    },
+    {
+      "id": "a_object_012",
+      "text": "A CANDLE"
+    },
+    {
+      "id": "a_object_013",
+      "text": "A HAMMER"
+    },
+    {
+      "id": "a_object_014",
+      "text": "A RAKE"
+    },
+    {
+      "id": "a_object_015",
+      "text": "A STONE"
+    },
+    {
+      "id": "a_object_100",
+      "text": "A SHIRT"
+    },
+    {
+      "id": "a_basic_0030_0",
+      "text": "DON QUIXOTE PART I"
+    },
+    {
+      "id": "a_basic_0030_1",
+      "text": "PROGRAM:EGROJ"
+    },
+    {
+      "id": "a_basic_0030_2",
+      "text": "MSX VERSION:MARCOS JOURON"
+    },
+    {
+      "id": "a_basic_0030_3",
+      "text": "GRAPHICS:PABLO AND EGROJ"
+    },
+    {
+      "id": "a_basic_0030_4",
+      "text": "COPYRIGHT DINAMIC SOFTWARE 1987"
+    },
+    {
+      "id": "a_basic_0070_0",
+      "text": "NAME?"
+    },
+    {
+      "id": "a_basic_6010_0",
+      "text": "SANCHO:YOU SHOULD FIND A KEY"
+    },
+    {
+      "id": "a_basic_7300_0",
+      "text": "LOAD OR SAVE ERROR"
+    },
+    {
+      "id": "b_room_011",
+      "text": "You enter the windmill. Sacks lie in the middle of the room. The exit is west."
+    },
+    {
+      "id": "b_room_001",
+      "text": "Lovely countryside in La Mancha. Sheep block the way west. The path continues east."
+    },
+    {
+      "id": "b_room_002",
+      "text": "Monks guard a carriage halted on the road. The road runs west to south."
+    },
+    {
+      "id": "b_room_021",
+      "text": "You skirt an oak wood. The winding path leads east and north."
+    },
+    {
+      "id": "b_room_022",
+      "text": "Sunbeams filter through this splendid wood. You can go south, east or west."
+    },
+    {
+      "id": "b_room_023",
+      "text": "The border of wood and mountain. You can go east or west."
+    },
+    {
+      "id": "b_room_024",
+      "text": "Deep in the wood, fallen leaves carpet the ground. Exits lead east and south."
+    },
+    {
+      "id": "b_room_025",
+      "text": "The forest path splits three ways: south, north and west."
+    },
+    {
+      "id": "b_room_026",
+      "text": "A village lies nearby to the west. The wood continues north and east."
+    },
+    {
+      "id": "b_room_027",
+      "text": "Woods everywhere! All paths lead into them. Choose east, west or north."
+    },
+    {
+      "id": "b_room_028",
+      "text": "You follow a woodland path. An inn door lies south. You can also go east or west."
+    },
+    {
+      "id": "b_room_029",
+      "text": "An orange tree in La Mancha! As strange as an apple tree! Yet here it stands. The path runs north to west."
+    },
+    {
+      "id": "b_room_031",
+      "text": "A gloomy street in Almagro. The street runs east to south."
+    },
+    {
+      "id": "b_room_032",
+      "text": "A windmill stands far to the north. From this lovely street in Almagro, you can go east."
+    },
+    {
+      "id": "b_room_033",
+      "text": "You are in the main square. Streets lead north, south and west."
+    },
+    {
+      "id": "b_room_034",
+      "text": "The alley ends here. Perhaps the doors to the south and west lead somewhere new. I would try south."
+    },
+    {
+      "id": "b_room_003",
+      "text": "These plains of La Mancha are so dry. The path ends here. Go south to return."
+    },
+    {
+      "id": "b_room_004",
+      "text": "A typical windmill stands to the east. The path runs south to north."
+    },
+    {
+      "id": "b_room_005",
+      "text": "This cart track leads north. The village lies behind you, to the south."
+    },
+    {
+      "id": "b_room_012",
+      "text": "A cosy room in Almagro. This house reminds you of a special place. The door is east."
+    },
+    {
+      "id": "b_room_013",
+      "text": "You enter the barber's shop. A mirror fills the left wall. The exit is north."
+    },
+    {
+      "id": "b_room_014",
+      "text": "You are in the inn's entrance. A guard watches a door to the east. A sign hangs on the wall. The exit is north."
+    },
+    {
+      "id": "b_room_015",
+      "text": "Dim light reveals three doors: east, south and west. Little else is of interest."
+    },
+    {
+      "id": "b_room_041",
+      "text": "You are in a dark cave. The earth has been disturbed. The exit is east."
+    },
+    {
+      "id": "b_room_042",
+      "text": "The path ends here. A cave entrance lies west. A lion guards this place. You can also go south."
+    },
+    {
+      "id": "b_room_044",
+      "text": "Stones roll downhill as you follow the path east to north. Better not look down."
+    },
+    {
+      "id": "b_room_043",
+      "text": "You reach the summit. La Mancha stretches below in a magnificent view. You can go south."
+    },
+    {
+      "id": "b_room_045",
+      "text": "A narrow trail splits into three dreadful paths: east, north and south."
+    },
+    {
+      "id": "b_room_046",
+      "text": "From this hillside, go west to the wood, or north or south through the hills."
+    },
+    {
+      "id": "b_room_047",
+      "text": "You stand at the foot of the hills. A steep trail climbs north. If heights frighten you, go south."
+    },
+    {
+      "id": "b_room_016",
+      "text": "An inn bedroom. A window breaks the bare wall. You can go west."
+    },
+    {
+      "id": "b_room_017",
+      "text": "One of the inn's two bedrooms. A lovely view lies beyond the window. You can go north."
+    },
+    {
+      "id": "b_room_060",
+      "text": "You are atop an orange tree. It bears no fruit. Climb down before you fall."
+    },
+    {
+      "id": "b_room_201",
+      "text": "To play this part, type the password."
+    },
+    {
+      "id": "b_message_001",
+      "text": "The sheep block your way."
+    },
+    {
+      "id": "b_message_002",
+      "text": "The shepherd strikes you dead."
+    },
+    {
+      "id": "b_message_003",
+      "text": "The carriage blocks your way."
+    },
+    {
+      "id": "b_message_004",
+      "text": "Outnumbered, you are defeated."
+    },
+    {
+      "id": "b_message_005",
+      "text": "MONK: \"Rising early will not make the sun rise sooner.\""
+    },
+    {
+      "id": "b_message_006",
+      "text": "The carriage moves aside."
+    },
+    {
+      "id": "b_message_007",
+      "text": "A maiden is inside."
+    },
+    {
+      "id": "b_message_008",
+      "text": "You cannot."
+    },
+    {
+      "id": "b_message_009",
+      "text": "The monks stop you."
+    },
+    {
+      "id": "b_message_010",
+      "text": "A monk drops something."
+    },
+    {
+      "id": "b_message_011",
+      "text": "Wind turns its sails."
+    },
+    {
+      "id": "b_message_012",
+      "text": "A sail strikes your head."
+    },
+    {
+      "id": "b_message_013",
+      "text": "You mistake them for giants and attack. Your lance catches in a sail. You fall from a great height."
+    },
+    {
+      "id": "b_message_014",
+      "text": "They are wooden."
+    },
+    {
+      "id": "b_message_015",
+      "text": "It is oak wood."
+    },
+    {
+      "id": "b_message_016",
+      "text": "You see La Mancha."
+    },
+    {
+      "id": "b_message_017",
+      "text": "A maiden enters. It is Dulcinea! Congratulations, my friend. You have succeeded."
+    },
+    {
+      "id": "b_message_018",
+      "text": "The barber appears and shaves you. He leaves, forgetting his basin."
+    },
+    {
+      "id": "b_message_019",
+      "text": "The barber appears, cuts your hair and leaves."
+    },
+    {
+      "id": "b_message_020",
+      "text": "That face looks familiar."
+    },
+    {
+      "id": "b_message_021",
+      "text": "GUARD: \"You may not pass.\""
+    },
+    {
+      "id": "b_message_022",
+      "text": "GUARD: \"You lack something a good knight needs.\""
+    },
+    {
+      "id": "b_message_023",
+      "text": "Only for knights of high standing."
+    },
+    {
+      "id": "b_message_024",
+      "text": "The guard opens the door."
+    },
+    {
+      "id": "b_message_025",
+      "text": "As you make it, something falls to the floor."
+    },
+    {
+      "id": "b_message_026",
+      "text": "It is already made."
+    },
+    {
+      "id": "b_message_027",
+      "text": "The bed is unmade."
+    },
+    {
+      "id": "b_message_028",
+      "text": "A quilt covers the bed."
+    },
+    {
+      "id": "b_message_029",
+      "text": "You see a rosemary bush."
+    },
+    {
+      "id": "b_message_030",
+      "text": "You already did that."
+    },
+    {
+      "id": "b_message_031",
+      "text": "Very good."
+    },
+    {
+      "id": "b_message_032",
+      "text": "Excellent."
+    },
+    {
+      "id": "b_message_033",
+      "text": "The lion blocks your way. Angered, it bites you. You are dead."
+    },
+    {
+      "id": "b_message_034",
+      "text": "You merely tickle it with your sword tip."
+    },
+    {
+      "id": "b_message_035",
+      "text": "It never fails. Music soothes savage beasts."
+    },
+    {
+      "id": "b_message_036",
+      "text": "A large cauldron appears."
+    },
+    {
+      "id": "b_message_239",
+      "text": "You carry"
+    },
+    {
+      "id": "b_message_241",
+      "text": "You cannot."
+    },
+    {
+      "id": "b_message_242",
+      "text": "Pardon?"
+    },
+    {
+      "id": "b_message_243",
+      "text": "Press a key..."
+    },
+    {
+      "id": "b_message_244",
+      "text": "Are you sure? (Y/N)"
+    },
+    {
+      "id": "b_message_245",
+      "text": "You already have it."
+    },
+    {
+      "id": "b_message_246",
+      "text": "You do not have it."
+    },
+    {
+      "id": "b_message_247",
+      "text": "You cannot see it."
+    },
+    {
+      "id": "b_message_248",
+      "text": "You carry too much to take that."
+    },
+    {
+      "id": "b_message_251",
+      "text": "Too dark to see."
+    },
+    {
+      "id": "b_message_252",
+      "text": "I cannot find it anywhere."
+    },
+    {
+      "id": "b_message_253",
+      "text": "You can also see"
+    },
+    {
+      "id": "b_message_254",
+      "text": "Perfect."
+    },
+    {
+      "id": "b_message_040",
+      "text": "It is heavy."
+    },
+    {
+      "id": "b_message_041",
+      "text": "Traces of salt lie among the wheat sacks."
+    },
+    {
+      "id": "b_message_042",
+      "text": "Sacks of wheat."
+    },
+    {
+      "id": "b_message_037",
+      "text": "The earth is reddish."
+    },
+    {
+      "id": "b_message_043",
+      "text": "Why spoil the scenery?"
+    },
+    {
+      "id": "b_message_044",
+      "text": "Balm of Fierabras: put wine, oil, rosemary and salt in the cauldron. Mix them, and it is ready."
+    },
+    {
+      "id": "b_message_045",
+      "text": "You trip on a stone, fall and hurt your leg. Slowly, you get up."
+    },
+    {
+      "id": "b_message_046",
+      "text": "Is that really a wise way to provoke a lion?"
+    },
+    {
+      "id": "b_message_070",
+      "text": "After digging a large hole, you find a huge cauldron."
+    },
+    {
+      "id": "b_message_071",
+      "text": "Surely not with your fingers?"
+    },
+    {
+      "id": "b_message_072",
+      "text": "Bubble, bubble..."
+    },
+    {
+      "id": "b_message_073",
+      "text": "An ingredient is missing from the potion."
+    },
+    {
+      "id": "b_message_075",
+      "text": "You need a tool."
+    },
+    {
+      "id": "b_message_076",
+      "text": "Argh! Awful, but effective."
+    },
+    {
+      "id": "b_message_077",
+      "text": "No balm remains. You already drank it."
+    },
+    {
+      "id": "b_message_078",
+      "text": "The balm is inside."
+    },
+    {
+      "id": "b_message_079",
+      "text": "Nothing here."
+    },
+    {
+      "id": "b_message_080",
+      "text": "It is rusty iron."
+    },
+    {
+      "id": "b_message_081",
+      "text": "The door is shut."
+    },
+    {
+      "id": "b_message_082",
+      "text": "You open the door."
+    },
+    {
+      "id": "b_message_083",
+      "text": "You have no key."
+    },
+    {
+      "id": "b_message_084",
+      "text": "You already opened it."
+    },
+    {
+      "id": "b_message_100",
+      "text": "I think you are trying to cheat."
+    },
+    {
+      "id": "b_message_105",
+      "text": "."
+    },
+    {
+      "id": "b_message_120",
+      "text": "Trees, grasses and plants that dwell here..."
+    },
+    {
+      "id": "b_message_150",
+      "text": "Freshly baked."
+    },
+    {
+      "id": "b_message_151",
+      "text": "It is dry."
+    },
+    {
+      "id": "b_message_152",
+      "text": "Ready to eat."
+    },
+    {
+      "id": "b_message_153",
+      "text": "A fine feast for pigs."
+    },
+    {
+      "id": "b_message_154",
+      "text": "Its edge gleams."
+    },
+    {
+      "id": "b_message_155",
+      "text": "Blue and red checks."
+    },
+    {
+      "id": "b_message_156",
+      "text": "It reads D.T."
+    },
+    {
+      "id": "b_message_160",
+      "text": "Your fall still hurts."
+    },
+    {
+      "id": "b_message_161",
+      "text": "The pain is unbearable. You can go no further."
+    },
+    {
+      "id": "b_message_162",
+      "text": "Urgh... phew!"
+    },
+    {
+      "id": "b_message_164",
+      "text": "Your stomach rumbles."
+    },
+    {
+      "id": "b_message_165",
+      "text": "You cannot last without food."
+    },
+    {
+      "id": "b_message_157",
+      "text": "What a vintage!"
+    },
+    {
+      "id": "b_message_158",
+      "text": "Argh! Horrible."
+    },
+    {
+      "id": "b_message_159",
+      "text": "I cannot fight without arms."
+    },
+    {
+      "id": "b_message_223",
+      "text": "A branch falls and strikes your head."
+    },
+    {
+      "id": "b_message_224",
+      "text": "Some acorns fall."
+    },
+    {
+      "id": "b_message_200",
+      "text": "There is a shelf."
+    },
+    {
+      "id": "b_message_201",
+      "text": "You see a loaf of bread."
+    },
+    {
+      "id": "b_message_202",
+      "text": "It is oak wood."
+    },
+    {
+      "id": "b_message_203",
+      "text": "A bramble laden with blackberries."
+    },
+    {
+      "id": "b_message_204",
+      "text": "No berries remain."
+    },
+    {
+      "id": "b_message_205",
+      "text": "You open the wardrobe."
+    },
+    {
+      "id": "b_message_206",
+      "text": "It is empty."
+    },
+    {
+      "id": "b_message_207",
+      "text": "There is a piece of cod."
+    },
+    {
+      "id": "b_message_208",
+      "text": "There is a wardrobe."
+    },
+    {
+      "id": "b_message_209",
+      "text": "It is already open."
+    },
+    {
+      "id": "b_message_214",
+      "text": "Varied and diverse."
+    },
+    {
+      "id": "b_message_210",
+      "text": "It is earth."
+    },
+    {
+      "id": "b_message_211",
+      "text": "It is made of tiles."
+    },
+    {
+      "id": "b_message_212",
+      "text": "It is brick."
+    },
+    {
+      "id": "b_message_213",
+      "text": "These monks stand firmly before you."
+    },
+    {
+      "id": "b_message_215",
+      "text": "Not a cloud."
+    },
+    {
+      "id": "b_message_216",
+      "text": "Of many kinds."
+    },
+    {
+      "id": "b_message_217",
+      "text": "You see outside."
+    },
+    {
+      "id": "b_message_218",
+      "text": "It has four legs."
+    },
+    {
+      "id": "b_message_197",
+      "text": "Thank you for the compliment."
+    },
+    {
+      "id": "b_message_198",
+      "text": "No violence, thank you."
+    },
+    {
+      "id": "b_message_199",
+      "text": "SANCHO: \"An ingenious gentleman needs help? Amazing!\""
+    },
+    {
+      "id": "b_message_235",
+      "text": "You lose your footing and fall."
+    },
+    {
+      "id": "b_message_236",
+      "text": "The branches cannot bear your weight. You fall."
+    },
+    {
+      "id": "b_object_001",
+      "text": "A BASIN"
+    },
+    {
+      "id": "b_object_002",
+      "text": "A KEY"
+    },
+    {
+      "id": "b_object_003",
+      "text": "SOME SALT"
+    },
+    {
+      "id": "b_object_004",
+      "text": "SOME ROSEMARY"
+    },
+    {
+      "id": "b_object_005",
+      "text": "A SCROLL"
+    },
+    {
+      "id": "b_object_006",
+      "text": "A BOTTLE OF WINE"
+    },
+    {
+      "id": "b_object_007",
+      "text": "A SWORD"
+    },
+    {
+      "id": "b_object_008",
+      "text": "A SHOVEL"
+    },
+    {
+      "id": "b_object_009",
+      "text": "A BOTTLE OF OIL"
+    },
+    {
+      "id": "b_object_010",
+      "text": "A CLEAR BOTTLE"
+    },
+    {
+      "id": "b_object_011",
+      "text": "AN EMPTY BOTTLE"
+    },
+    {
+      "id": "b_object_012",
+      "text": "A TWIG"
+    },
+    {
+      "id": "b_object_013",
+      "text": "A CAULDRON"
+    },
+    {
+      "id": "b_object_014",
+      "text": "A LOAF OF BREAD"
+    },
+    {
+      "id": "b_object_015",
+      "text": "A PIECE OF COD"
+    },
+    {
+      "id": "b_object_016",
+      "text": "SOME BLACKBERRIES"
+    },
+    {
+      "id": "b_object_017",
+      "text": "TWO DOZEN ACORNS"
+    },
+    {
+      "id": "b_object_018",
+      "text": "A NAIL"
+    },
+    {
+      "id": "b_object_045",
+      "text": "A SHIRT"
+    },
+    {
+      "id": "b_basic_0030_0",
+      "text": "DON QUIXOTE PART II"
+    },
+    {
+      "id": "b_basic_0030_1",
+      "text": "PROGRAM:EGROJ"
+    },
+    {
+      "id": "b_basic_0030_2",
+      "text": "MSX VERSION:MARCOS JOURON"
+    },
+    {
+      "id": "b_basic_0030_3",
+      "text": "GRAPHICS:PABLO AND EGROJ"
+    },
+    {
+      "id": "b_basic_0030_4",
+      "text": "COPYRIGHT DINAMIC SOFTWARE 1987"
+    },
+    {
+      "id": "b_basic_0070_0",
+      "text": "NAME?"
+    },
+    {
+      "id": "b_basic_5000_0",
+      "text": "YOU TRIP ON A STONE AND HURT YOUR LEG. SLOWLY, YOU GET UP."
+    },
+    {
+      "id": "b_basic_6536_0",
+      "text": "IT IS TOO COLD."
+    },
+    {
+      "id": "b_basic_8002_0",
+      "text": "LOAD OR SAVE ERROR"
+    }
+  ]
+}

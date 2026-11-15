@@ -1,0 +1,62 @@
+\documentclass[a4paper,11pt]{article}
+\providecommand{\manlang}{es}
+\providecommand{\gameplayimage}{assets/first-room.png}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,spanish]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[margin=21mm,top=23mm,bottom=23mm]{geometry}
+\usepackage{graphicx,xcolor,booktabs,tabularx,array,fancyhdr,parskip,microtype,tikz,enumitem}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{hyperref}
+\definecolor{accent}{HTML}{947032}
+\definecolor{gold}{HTML}{D0AC62}
+\definecolor{ink}{HTML}{111A20}
+\definecolor{paper}{HTML}{F6F0E4}
+\definecolor{teal}{HTML}{226A6B}
+\hypersetup{hidelinks,pdftitle={Don Quijote — MSX-DOS + OPL4},pdfauthor={DiHalt Studio},pdfsubject={Original Dinamic adventure with fast picture loading and OPL4 speech}}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\headheight}{15pt}
+\setlist{itemsep=4pt,topsep=4pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\textcolor{accent}{\textbf{DON QUIJOTE}} \enspace MSX-DOS + OPL4}
+\fancyhead[R]{\small DiHalt Studio}
+\fancyfoot[L]{\scriptsize Dinamic, 1987 \enspace $\cdot$ \enspace DiHalt Studio, 2026}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\newcommand{\key}[1]{{\fboxsep=3pt\fcolorbox{accent}{paper}{\textbf{\strut #1}}}}
+\newcommand{\cmd}[1]{\texttt{\textbf{#1}}}
+\newcommand{\sectionpage}[1]{\clearpage\section{\textcolor{accent}{#1}}}
+\newcommand{\noteBox}[2]{\begin{center}\fcolorbox{gold}{paper}{\parbox{0.92\linewidth}{\textbf{#1}\par\smallskip #2}}\end{center}}
+\newcommand{\screenfigure}[1]{\begin{center}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.91\linewidth]{\gameplayimage}};
+\begin{scope}[x={(image.south east)},y={(image.north west)}]
+\foreach \n/\y/\x in {1/0.70/0.27,2/0.26/0.23,3/0.10/0.14} {
+\node[circle,fill=gold,text=ink,draw=white,line width=0.5pt,minimum size=6mm,font=\bfseries\small,inner sep=0pt] (mark\n) at (0.055,\y) {\n};
+\draw[-Latex,draw=gold,line width=1pt] (mark\n) -- (\x,\y);
+}
+\end{scope}
+\end{tikzpicture}\par\smallskip{\small #1}\end{center}}
+\newcommand{\twochoices}[4]{\begin{center}\begin{tikzpicture}[font=\small,box/.style={draw=accent,rounded corners=3pt,fill=paper,text width=58mm,minimum height=19mm,align=center},arr/.style={-Latex,thick,draw=teal}]
+\node[box] (files) at (0,0) {\textbf{SD/}\\#1};
+\node[box] (dosone) at (-3.7,-2.5) {\textbf{DOS1}\\#2};
+\node[box] (dostwo) at (3.7,-2.5) {\textbf{DOS2 / Nextor}\\#3};
+\draw[arr] (files) -- (dosone);\draw[arr] (files) -- (dostwo);
+\node[box,fill=ink,text=white,draw=ink,text width=63mm] at (0,-5) {\textbf{QUIJOTE / QUIXOTE}\\#4};
+\draw[arr] (dosone) -- (0,-4.6);\draw[arr] (dostwo) -- (0,-4.6);
+\end{tikzpicture}\end{center}}
+\newcommand{\cover}[3]{\hypersetup{pageanchor=false}\begin{titlepage}\pagecolor{ink}\color{white}\thispagestyle{empty}
+\begin{center}\vspace*{2mm}{\small\bfseries\color{gold} DINAMIC \enspace $\bullet$ \enspace 1987}\par\vspace{8mm}
+{\fontsize{38}{42}\selectfont\bfseries DON QUIJOTE}\par\vspace{3mm}
+{\Large #1}\par\vspace{8mm}
+\fcolorbox{gold}{black}{\includegraphics[width=0.88\linewidth]{assets/cover-original.png}}\par\vspace{8mm}
+{\Large\bfseries\color{gold} #2}\par\vspace{3mm}{\large #3}\par\vfill
+\includegraphics[width=37mm]{assets/msx-logo.png}\hfill\includegraphics[width=34mm]{assets/dihalt-logo.png}\par\vspace{5mm}
+{\small MSX-DOS 1 \enspace $\bullet$ \enspace MSX-DOS 2 / Nextor \enspace $\bullet$ \enspace OPL4}\par
+\end{center}\end{titlepage}\hypersetup{pageanchor=true}\nopagecolor\color{ink}}
+\begin{document}
+\input{content-\manlang.tex}
+\end{document}

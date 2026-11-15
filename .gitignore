@@ -1,0 +1,12 @@
+/build/
+/release/*
+!/release/.gitkeep
+/third_party/*
+!/third_party/README.md
+/docs/manual/build/
+.venv*/
+__pycache__/
+*.pyc
+*.lst
+*.sym
+.DS_Store

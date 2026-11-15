@@ -1,0 +1,230 @@
+\selectlanguage{spanish}
+\cover{Manual del jugador}{Imágenes al instante. Aventura con voz.}{MSX-DOS + OPL4}
+
+\thispagestyle{empty}
+\begin{center}\vspace*{8mm}{\fontsize{29}{33}\selectfont\bfseries\color{accent} Vuelve a la Mancha}\par\vspace{8mm}
+\includegraphics[width=0.85\linewidth]{assets/cover-original.png}
+\end{center}
+\textbf{Don Quijote}, publicado por Dinamic en 1987, lleva al ordenador una aventura inspirada libremente en el mundo de Cervantes. En esta aventura gráfica conversacional, Alonso Quijano persigue su ideal de caballería entre caminos, ventas y pueblos de la Mancha.
+
+Esta edición para MSX-DOS conserva la aventura, los textos y los dibujos del juego existente. Sus novedades son la \textbf{carga rápida de las imágenes} y la \textbf{narración OPL4} de las descripciones y respuestas. Las dos partes se enlazan en una misma sesión.
+
+Primero deberás prepararte para convertirte en caballero. Después te esperan las andanzas que te acercarán a Dulcinea. Mira a tu alrededor, lee con atención y deja que los lugares y sus habitantes te orienten.
+
+\noteBox{Dos ediciones}{Puedes jugar en español con \cmd{QUIJOTE} o en inglés con \cmd{QUIXOTE}. Cada edición tiene sus textos, órdenes y voz en ese idioma. Los ejemplos principales de este manual corresponden a la española.}
+\vfill
+{\small Edición MSX-DOS + OPL4 de DiHalt Studio, 2026. Adaptación no oficial y homenaje al trabajo de sus autores originales.}
+\clearpage
+\tableofcontents
+\vfill
+\noteBox{Si ya tienes Nextor arrancado}{Copia todos los archivos de \cmd{SD/} a la carpeta del juego. Selecciona su unidad, entra en esa carpeta con \cmd{CD} y escribe \cmd{QUIJOTE}. Encontrarás el procedimiento completo en la sección de arranque en Nextor/DOS2.}
+
+\sectionpage{Elegir español o inglés}
+El idioma se elige al ejecutar el programa. \cmd{QUIJOTE.COM} es la edición española; \cmd{QUIXOTE.COM}, la inglesa. Ambas contienen las dos partes y funcionan tanto en DOS1 como en DOS2/Nextor.
+
+\begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
+ & Español & English\\\midrule
+Carpeta de entrega & \cmd{release/SD/} & \cmd{release/SD/}\\
+Orden de arranque & \cmd{QUIJOTE} & \cmd{QUIXOTE}\\
+Archivos de juego & Todos; unos 10,9 MiB & Todos; unos 10,9 MiB\\
+Narración & Español de España & Inglés británico\\\bottomrule
+\end{tabularx}
+
+Copia todos los archivos del único paquete \cmd{release/SD/} a una misma carpeta (a la raíz en DOS1). Incluye ambos idiomas y comparte las imágenes y la presentación. Elige el idioma ejecutando \cmd{QUIJOTE} o \cmd{QUIXOTE}. En inglés, los datos se llaman \cmd{ENGAME.DAT}, \cmd{ENINDEX.DAT}, \cmd{ENSCORE.DAT} y \cmd{ENVOX0.PCM} a \cmd{ENVOX4.PCM}.
+
+\begin{tabularx}{\linewidth}{@{}XX@{}}\toprule
+Órdenes en español & Órdenes en inglés\\\midrule
+\cmd{MIRAR}, \cmd{INVENTARIO} & \cmd{LOOK}, \cmd{INVENTORY}\\
+\cmd{NORTE}, \cmd{SUR}, \cmd{ESTE}, \cmd{OESTE} & \cmd{NORTH}, \cmd{SOUTH}, \cmd{EAST}, \cmd{WEST}\\
+\cmd{SUBIR}, \cmd{BAJAR} & \cmd{UP}, \cmd{DOWN}\\
+\cmd{LEER LIBRO} & \cmd{READ BOOK}\\
+\cmd{EXAMINAR PARED} & \cmd{EXAMINE WALL}\\
+\cmd{COGER ESPADA} & \cmd{TAKE SWORD}\\
+\cmd{ABRIR PUERTA} & \cmd{OPEN DOOR}\\
+\cmd{ACABAR} & \cmd{QUIT}\\
+\cmd{GRABAR}, \cmd{CARGAR} & \cmd{SAVE}, \cmd{LOAD}\\\bottomrule
+\end{tabularx}
+
+En inglés puedes usar \cmd{N/S/E/W/U/D}, \cmd{L} e \cmd{I}. Escribe las palabras completas de las órdenes y de los objetos, o una abreviatura admitida. Los nombres que aparecen en cada descripción te orientan.
+
+La clave que anuncia el final de la primera parte se traduce con el juego. La pantalla inicial acepta cualquiera de las dos versiones, sin distinguir mayúsculas ni espacios. Dejarla vacía y pulsar \key{ENTER} siempre comienza la primera parte.
+
+\sectionpage{Lo que necesitas}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{32mm}X@{}}\toprule
+Equipo & Requisito\\\midrule
+Ordenador & MSX1 o posterior, con teclado.\\
+Almacenamiento & MegaFlashROM SCC+ SD o equivalente compatible con MSX-DOS. Se necesitan \textbf{512 KiB de RAM mapeada}.\\
+Sonido & OPL4 compatible con \textbf{2 MiB de RAM para muestras}; por ejemplo, una Wozblaster con esa capacidad.\\
+Sistema & MSX-DOS 1 o MSX-DOS 2 / Nextor. El mismo \cmd{QUIJOTE.COM} sirve en ambos.\\
+Imagen & Monitor o televisor conectado a la salida habitual de vídeo del MSX.\\
+Archivos & Todos los archivos de juego de \cmd{release/SD/}, juntos. Reserva unos \textbf{10,9 MiB} de espacio libre.\\
+Controles & Teclado del MSX. No necesitas joystick para dar órdenes.\\\bottomrule
+\end{tabularx}
+
+La ampliación de RAM del MSX y la memoria de la OPL4 cumplen funciones distintas. \textbf{Necesitas las dos capacidades indicadas.} Comprueba la memoria instalada en tus cartuchos, no solo el nombre del modelo.
+
+Apaga el equipo antes de conectar o retirar los cartuchos. Si utilizas más dispositivos y no quedan ranuras libres, conecta un expansor de slots adecuado para tu instalación.
+
+\noteBox{Conserva tu instalación habitual}{Para jugar desde una carpeta de Nextor/DOS2 solo necesitas los archivos de \cmd{SD/}. Los archivos de \cmd{DOS1BOOT/} son opcionales y están destinados al arranque de DOS1.}
+
+\sectionpage{Preparar el equipo y elegir el arranque}
+\begin{enumerate}
+\item Con el MSX apagado, conecta la interfaz de almacenamiento y la OPL4 en ranuras disponibles.
+\item Inserta la tarjeta SD que contiene los archivos del juego.
+\item Conecta el monitor a la salida de vídeo habitual del MSX y prepara la salida de audio de tu equipo y de la OPL4. Empieza con un volumen moderado.
+\item Enciende el monitor y el ordenador.
+\item Llega al símbolo de órdenes de DOS. Si tu instalación abre un gestor de archivos, vuelve a su consola para seguir las instrucciones de arranque.
+\end{enumerate}
+
+\twochoices{archivos de juego}{Archivos en la raíz}{Archivos en una carpeta}{El mismo juego y las mismas voces}
+
+\textbf{Nextor/DOS2} es la opción cómoda si quieres conservar el juego dentro de una carpeta. \textbf{DOS1} requiere que los archivos estén en la raíz de la partición. La letra de unidad dependerá de tu instalación: en los ejemplos usamos \cmd{B:}.
+
+\sectionpage{Instalación y arranque en Nextor/DOS2}
+Copia \textbf{todos los archivos de \cmd{release/SD/}} a una carpeta de tu tarjeta. Puedes llamarla \cmd{QUIJOTE} dentro de \cmd{JUEGOS}, por ejemplo.
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}\toprule
+Archivo & Función para el jugador\\\midrule
+\cmd{QUIJOTE.COM} & Es el programa que debes ejecutar.\\
+\cmd{GAME.DAT} & Datos de las dos partes del juego.\\
+\cmd{BRAND.DAT} & Presentación de DiHalt Studio.\\
+\cmd{INDEX.DAT}, \cmd{SCORES.DAT} & Recursos necesarios para la narración.\\
+\cmd{VOICE0.PCM} a \cmd{VOICE5.PCM} & Los seis archivos de voz. Copia los seis.\\
+\cmd{VRAM.DAT}, \cmd{VRAM.IDX} & Recursos de las imágenes.\\\bottomrule
+\end{tabularx}
+
+Desde la consola de Nextor/DOS2:
+\begin{quote}\ttfamily
+B:\\
+CD \textbackslash JUEGOS\textbackslash QUIJOTE\\
+QUIJOTE
+\end{quote}
+
+Ajusta \cmd{B:} y la ruta a los nombres que uses. \textbf{Debes entrar primero en la carpeta del juego}: sus datos se buscan en el directorio actual. Mantén todos los archivos juntos y con sus nombres originales.
+
+\noteBox{Qué copiar y qué ejecutar}{Copia el contenido de \cmd{SD/}; el archivo ejecutable es \cmd{QUIJOTE.COM}. No necesitas copiar \cmd{DOS1BOOT/} dentro de la carpeta de juego para Nextor/DOS2.}
+
+No necesitas flashear la aventura en la MegaFlashROM. Se ejecuta desde los archivos de la SD.
+
+\sectionpage{Instalación y arranque en DOS1}
+\textbf{DOS1 no admite subdirectorios.} Copia el contenido de \cmd{release/SD/} a la \textbf{raíz} de una partición compatible con DOS1. La imagen de referencia que acompaña a las herramientas del proyecto utiliza FAT12 de 16 MiB.
+
+Si todavía necesitas archivos para arrancar DOS1, \cmd{release/DOS1BOOT/} incluye:
+\begin{itemize}
+\item \cmd{MSXDOS.SYS}
+\item \cmd{COMMAND.COM}
+\item \cmd{AUTOEXEC.BAT}
+\end{itemize}
+Copia también esos archivos a la raíz si vas a utilizar ese sistema. Si ya tienes una instalación DOS1 que funciona, puedes conservar sus archivos de arranque.
+
+En una MegaFlashROM con Nextor, mantener pulsada la tecla \key{1} durante el arranque selecciona el modo DOS1. Después selecciona la unidad que contiene el juego y ejecútalo:
+\begin{quote}\ttfamily
+B:\\
+QUIJOTE
+\end{quote}
+
+El \cmd{AUTOEXEC.BAT} incluido contiene la orden \cmd{QUIJOTE}. Si tu equipo arranca desde otra unidad, selecciona manualmente la unidad de la tarjeta antes de ejecutar el juego.
+
+\noteBox{Un solo ejecutable}{No hay un programa distinto para cada DOS. En DOS1 y en Nextor/DOS2 utilizas el mismo \cmd{QUIJOTE.COM} y los mismos archivos del juego.}
+
+\sectionpage{Del arranque a tu primera orden}
+Al comenzar verás la presentación de DiHalt Studio acompañada por una fanfarria OPL4 de unos diez segundos. Al terminar, pulsa \key{ENTER} con la entrada vacía para empezar la primera parte, o escribe la clave obtenida al completarla para empezar la segunda. Puedes corregirla con \key{BS}; si no es válida, vuelve a intentarlo. Después aparece la portada original y comienza la parte elegida.
+
+Cuando entres en una localidad con dibujo, \textbf{la imagen se muestra primero}; a continuación aparecen la descripción y su narración. Espera a que termine la frase, o pulsa \key{ESC} para cancelarla, antes de escribir tu orden.
+
+\screenfigure{La primera localidad: el dibujo, la descripción y el indicador de entrada del juego original.}
+
+\begin{enumerate}
+\item \textbf{Dibujo}: muestra el lugar cuando existe una ilustración para esa localidad.
+\item \textbf{Texto}: describe las salidas, los objetos y las consecuencias de tus acciones.
+\item \textbf{Entrada}: el símbolo \cmd{>} indica dónde puedes escribir tu siguiente orden.
+\end{enumerate}
+
+Cuando completes la primera parte, atiende al aviso y pulsa una tecla cuando se te pida. La segunda parte se carga en la misma sesión, \textbf{sin volver a escribir la clave}. Anótala para comenzar directamente en la segunda parte en otra sesión; no recupera una partida intermedia.
+
+\sectionpage{Controles y órdenes}
+\begin{tabularx}{\linewidth}{@{}p{43mm}X@{}}\toprule
+Acción & Tecla u orden\\\midrule
+Escribir una orden & Letras, espacios y nombres de objetos. Se admiten minúsculas.\\
+Enviar la orden & \key{RETURN / ENTER}\\
+Corregir al escribir & \key{BS / Retroceso}\\
+Cancelar la frase hablada & \key{ESC}; suelta la tecla antes de cancelar otra frase.\\
+Volver a describir el lugar & \cmd{MIRAR} (también \cmd{M}).\\
+Consultar lo que llevas & \cmd{INVENTARIO} (también \cmd{I}).\\
+Moverte & \cmd{NORTE}, \cmd{SUR}, \cmd{ESTE}, \cmd{OESTE}, \cmd{SUBIR}, \cmd{BAJAR}, cuando exista ese paso.\\
+Reiniciar la aventura & \cmd{ACABAR}. Úsalo si quieres volver a empezar.\\\bottomrule
+\end{tabularx}
+
+La forma más sencilla de dar una instrucción es \textbf{verbo + nombre}:
+\begin{quote}
+\cmd{LEER LIBRO}\par
+\cmd{EXAMINAR PARED}\par
+\cmd{COGER ESPADA}\par
+\cmd{ABRIR PUERTA}
+\end{quote}
+Escribe las órdenes sin tildes, como en estos ejemplos. Son muestras de vocabulario del juego, no una secuencia que debas seguir. El lugar, los objetos que llevas y lo ocurrido anteriormente determinan si una acción tiene sentido.
+
+\noteBox{Si escribes mientras habla}{La escritura normal se atiende después de la narración. Espera o cancela la frase con \key{ESC}; luego escribe y pulsa \key{RETURN / ENTER}.}
+
+\textbf{Solo en emulador:} \key{F9} acelera y \key{F10} abre la consola de openMSX con los lanzadores del proyecto. No son controles del juego en el MSX real.
+
+\sectionpage{Cómo avanzar sin perderte}
+Lee la descripción completa antes de actuar. A menudo contiene la salida que buscas o una pista sobre algo que merece examinarse. Si quieres escuchar o leer de nuevo el lugar, utiliza \cmd{MIRAR}.
+
+\begin{itemize}
+\item \textbf{Explora con método.} Anota las direcciones y dibuja un pequeño mapa de las localidades que ya conoces.
+\item \textbf{Observa y lee.} Un objeto puede tener información útil aunque todavía no puedas llevártelo.
+\item \textbf{Revisa el inventario.} El espacio y los objetos que conservas importan; el juego te avisará si llevas demasiadas cosas.
+\item \textbf{Prueba acciones concretas.} Si la respuesta no es la que esperabas, revisa el verbo, el objeto y el lugar en que te encuentras.
+\item \textbf{Cuida al hidalgo.} Comer y descansar forman parte de la aventura. Atiende a los avisos del juego.
+\item \textbf{No todo se ve de inmediato.} La oscuridad y las circunstancias de una escena pueden limitar lo que puedes observar.
+\end{itemize}
+
+\begin{center}\begin{tikzpicture}[font=\small,n/.style={draw=accent,fill=paper,rounded corners,text width=26mm,align=center,minimum height=12mm},a/.style={-Latex,thick,draw=teal}]
+\node[n] (m) {Mirar};\node[n,right=6mm of m] (e) {Examinar};\node[n,right=6mm of e] (p) {Pensar};\node[n,right=6mm of p] (a) {Actuar};
+\draw[a](m)--(e);\draw[a](e)--(p);\draw[a](p)--(a);
+\end{tikzpicture}\end{center}
+
+\noteBox{Sobre guardar y cargar}{Esta edición no incorpora partidas guardadas en la SD. Las órdenes originales \cmd{GRABAR} y \cmd{CARGAR} conservan el funcionamiento de cinta de la versión MSX. No las utilices esperando crear o abrir un archivo de partida en la carpeta del juego.}
+
+La ilustración no sustituye al texto. Algunas localidades pueden carecer de dibujo; sigue leyendo las descripciones y las respuestas para decidir qué hacer.
+
+\sectionpage{Si algo no funciona}
+\begin{tabularx}{\linewidth}{@{}p{47mm}X@{}}\toprule
+Lo que ocurre & Qué comprobar\\\midrule
+DOS no encuentra \cmd{QUIJOTE} & Selecciona la unidad correcta. En DOS2/Nextor, entra con \cmd{CD} en la carpeta que contiene \cmd{QUIJOTE.COM}.\\
+Error al cargar recursos & Comprueba todos los archivos y sus nombres. En DOS1 deben estar en la raíz; en DOS2, todos en el directorio actual.\\
+El programa se ve, pero no se oye & Comprueba la conexión y el volumen de la OPL4, su salida de audio y que dispone de 2 MiB de RAM para muestras.\\
+Las letras no aparecen mientras habla & Espera a que termine la frase o pulsa \key{ESC}. Después escribe la orden.\\
+La orden no se entiende & Usa vocabulario español y frases sencillas. Comprueba el nombre del objeto y vuelve a examinar el lugar.\\
+La partida vuelve a empezar & Lee el último aviso. Algunas acciones o situaciones ponen fin al intento.\\\bottomrule
+\end{tabularx}
+
+
+
+
+
+\sectionpage{Créditos y derechos}
+\textbf{Juego original}\par
+Don Quijote, Dinamic Software, 1987.\par
+Programa: \textbf{Jorge Blecua (Egroj)}.\par
+Versión MSX: \textbf{Marcos Jourón Berzosa}.\par
+Gráficos: \textbf{Pablo y Egroj}.\par
+Pantalla de carga: \textbf{Javier Cubedo}.\par
+Diseño artístico: \textbf{Ángel Luis González}.
+
+\textbf{Edición MSX-DOS + OPL4}\par
+\textbf{DiHalt Studio, 2026}: adaptación de carga desde SD, enlace de las dos partes, carga rápida de imágenes, narración OPL4 y este manual. Conserva los textos y la aventura de los autores originales.
+
+Este proyecto es una adaptación no oficial y un homenaje. Don Quijote, sus gráficos, textos y demás elementos originales pertenecen a sus respectivos titulares. No se declara afiliación con Dinamic ni con los autores originales. La presente edición no otorga derechos sobre las obras originales.
+
+Las imágenes de este manual proceden del propio juego: portada firmada por Cubedo y captura de la primera localidad. El logotipo MSX es una marca de sus titulares; la imagen procede del logotipo de formas simples publicado en Wikimedia Commons. El logotipo DiHalt Studio pertenece al proyecto.
+
+\textbf{Lecturas y procedencia}\par
+La ficha, los créditos y la reproducción del manual original conservados por Computer Emuzone se utilizaron para contrastar la historia y los nombres:\par
+\href{https://computeremuzone.com/ficha/151/don-quijote}{computeremuzone.com/ficha/151/don-quijote}.\par
+El archivo \cmd{SOURCES.md}, junto a las fuentes de este manual, detalla la procedencia de cada ilustración y de la información consultada.
+
+\vfill
+\textcolor{accent}{\textbf{Conserva la aventura. Comparte tus observaciones.}}\par
+Si te apetece mejorar esta edición, consulta el código y la documentación que acompañan al proyecto y aporta tus cambios a sus responsables.
