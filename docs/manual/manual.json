@@ -1,0 +1,34 @@
+{
+  "title": "Don Quijote",
+  "edition": "MSX-DOS + OPL4 2.0",
+  "media": "disk",
+  "languages": [
+    "es",
+    "en"
+  ],
+  "original_publisher": "Dinamic Software",
+  "original_year": 1987,
+  "adaptation_credit": "DiHalt Studio, 2026",
+  "game_files": 31,
+  "startup": "Language BAT, MSX1/MSX2 selector, memory report, DiHalt fanfare, Enter or part-two password, opening, selected part",
+  "pictures": {
+    "cover": "assets/cover-msx2.png",
+    "gameplay": "assets/first-room.png",
+    "msx_logo": "assets/msx-logo.png",
+    "dihalt_logo": "assets/dihalt-logo.png",
+    "gameplay_en": "assets/first-room-en.png"
+  },
+  "spoilers": false,
+  "game_editions": {
+    "es": {
+      "launcher": "QUIJOTE.BAT",
+      "msx1": "Q1ES.COM",
+      "msx2": "Q2ES.COM"
+    },
+    "en": {
+      "launcher": "QUIXOTE.BAT",
+      "msx1": "Q1EN.COM",
+      "msx2": "Q2EN.COM"
+    }
+  }
+}

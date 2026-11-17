@@ -1,0 +1,254 @@
+{
+  "languages": {
+    "es": {
+      "units": 1644,
+      "prepared_messages": 376,
+      "lookup_keys": 350,
+      "pcm_bytes": 6151573,
+      "mean_samples": 3728.090687766281,
+      "mean_seconds": 0.46601133597078515,
+      "median_samples": 3597,
+      "min_samples": 1207,
+      "max_samples": 8493,
+      "example": [
+        {
+          "hex": "00 00 00 00 00 00",
+          "delta": 0,
+          "unit": 0,
+          "pad": 0,
+          "tick": 0,
+          "seconds": 0.0
+        },
+        {
+          "hex": "e6 00 01 00 07 00",
+          "delta": 230,
+          "unit": 1,
+          "pad": 7,
+          "tick": 230,
+          "seconds": 0.2229591836734694
+        },
+        {
+          "hex": "84 02 02 00 02 00",
+          "delta": 644,
+          "unit": 2,
+          "pad": 2,
+          "tick": 874,
+          "seconds": 0.8472448979591837
+        },
+        {
+          "hex": "6f 02 03 00 01 00",
+          "delta": 623,
+          "unit": 3,
+          "pad": 1,
+          "tick": 1497,
+          "seconds": 1.4511734693877552
+        },
+        {
+          "hex": "6e 02 04 00 07 00",
+          "delta": 622,
+          "unit": 4,
+          "pad": 7,
+          "tick": 2119,
+          "seconds": 2.0541326530612243
+        },
+        {
+          "hex": "cc 00 05 00 04 00",
+          "delta": 204,
+          "unit": 5,
+          "pad": 4,
+          "tick": 2323,
+          "seconds": 2.251887755102041
+        }
+      ]
+    },
+    "en": {
+      "units": 1341,
+      "prepared_messages": 376,
+      "lookup_keys": 341,
+      "pcm_bytes": 4553236,
+      "mean_samples": 3381.913432835821,
+      "mean_seconds": 0.4227391791044776,
+      "median_samples": 3318.0,
+      "min_samples": 903,
+      "max_samples": 8586,
+      "example": [
+        {
+          "hex": "00 00 00 00 00 00",
+          "delta": 0,
+          "unit": 0,
+          "pad": 0,
+          "tick": 0,
+          "seconds": 0.0
+        },
+        {
+          "hex": "1a 00 01 00 07 00",
+          "delta": 26,
+          "unit": 1,
+          "pad": 7,
+          "tick": 26,
+          "seconds": 0.02520408163265306
+        },
+        {
+          "hex": "b9 01 02 00 01 00",
+          "delta": 441,
+          "unit": 2,
+          "pad": 1,
+          "tick": 467,
+          "seconds": 0.4527040816326531
+        },
+        {
+          "hex": "13 01 03 00 04 00",
+          "delta": 275,
+          "unit": 3,
+          "pad": 4,
+          "tick": 742,
+          "seconds": 0.7192857142857143
+        },
+        {
+          "hex": "5b 01 04 00 07 00",
+          "delta": 347,
+          "unit": 4,
+          "pad": 7,
+          "tick": 1089,
+          "seconds": 1.0556632653061224
+        },
+        {
+          "hex": "d3 01 05 00 07 00",
+          "delta": 467,
+          "unit": 5,
+          "pad": 7,
+          "tick": 1556,
+          "seconds": 1.5083673469387755
+        }
+      ]
+    }
+  },
+  "files": {
+    "BRAND.DAT": {
+      "bytes": 49152,
+      "sha256": "533437ef8cfeaddcae8137b0e7651a15ea5d93f6b04a5c88ad65ed61dce639e6"
+    },
+    "GAME.DAT": {
+      "bytes": 114688,
+      "sha256": "acf3c55597c8da9555a93434b3a2dbf1b20b33a1627ac733c4b0601c0cb83b74"
+    },
+    "INDEX.DAT": {
+      "bytes": 16384,
+      "sha256": "b4b819587b9833275df3b85add2f16d380cd416f9f1d84f88c1c777aeee52387"
+    },
+    "Q1ES.COM": {
+      "bytes": 7025,
+      "sha256": "33bbbfb31316a5bfeeae0d382105240f3c1f48a46944a7b43f7838c2b3527686"
+    },
+    "SCORES.DAT": {
+      "bytes": 32768,
+      "sha256": "a83974aa1ccd48045d5b9a5e10a2a1e9063fe62ea917c4a34cbe0182b8fb81ef"
+    },
+    "VOICE0.PCM": {
+      "bytes": 1048576,
+      "sha256": "e89d40b3f41dc17b70d811fb85a5bb2e5d620eafcb4b08875b240143439a5431"
+    },
+    "VOICE1.PCM": {
+      "bytes": 1048576,
+      "sha256": "c3774644be1c3ea2a74ab79245566be65f3a22c217f6e8f0fa1f1ac57d4f6a35"
+    },
+    "VOICE2.PCM": {
+      "bytes": 1048576,
+      "sha256": "06188f691944f5b71a820ac932cf64283f5a28b0dfdd33f7d8ad13f983ccf8c6"
+    },
+    "VOICE3.PCM": {
+      "bytes": 1048576,
+      "sha256": "70fb7e2d68e21d0aad9a4da6b74d866f28ce74906402f89e00e08975982c7289"
+    },
+    "VOICE4.PCM": {
+      "bytes": 1048576,
+      "sha256": "d34fe95d0831b699b87d8e55fa1527ec9e42db5cd1db42c08fd0bb54df9f01c6"
+    },
+    "VOICE5.PCM": {
+      "bytes": 917504,
+      "sha256": "909b42846a779c78e5196e2ef17f6d7436b66769ece2f89586448f32ec50f65e"
+    },
+    "VRAM.DAT": {
+      "bytes": 270336,
+      "sha256": "7eae4fdb13c8450e789a08af8f5f2a953b5332c1db53d8d34ebf94425502c4de"
+    },
+    "VRAM.IDX": {
+      "bytes": 16384,
+      "sha256": "645f8d3ae9f24d1bee9728d76db184c47faccea07b50b35b1e3d5d7fd0502fae"
+    },
+    "ENGAME.DAT": {
+      "bytes": 114688,
+      "sha256": "ec021437d0042f17537a3281a47779e3a73a167df39155cbbfb6a834e441183a"
+    },
+    "ENINDEX.DAT": {
+      "bytes": 16384,
+      "sha256": "3195ecabfc1a0d1cf34acdf5657dadeef333fd1ca2cfcba3dd183fa2c958b8c0"
+    },
+    "ENSCORE.DAT": {
+      "bytes": 32768,
+      "sha256": "c2984c01eae836c3b2f62907573039b5281d2c895b45a9471ef3e3deccf84b84"
+    },
+    "ENVOX0.PCM": {
+      "bytes": 1048576,
+      "sha256": "6fbbe70d81e5f204ba2d6154d9820304c7ced5a13ce81b3c1370358c97cbc4ec"
+    },
+    "ENVOX1.PCM": {
+      "bytes": 1048576,
+      "sha256": "ffbdd8c99b4a0b2f2a354a889eeb937048b4e92f9661408e25f6a4d8831b032f"
+    },
+    "ENVOX2.PCM": {
+      "bytes": 1048576,
+      "sha256": "ecb28746b915c68918a46f1c52636fecf86310498bfe9b91a0d6144ce97862ff"
+    },
+    "ENVOX3.PCM": {
+      "bytes": 1048576,
+      "sha256": "b587e43534efa087de1800a8d9057d42e75ea4a4a6753f93e106c2ed1041a42e"
+    },
+    "ENVOX4.PCM": {
+      "bytes": 360448,
+      "sha256": "4a2bf536e42be23f0b70248c0c1902902f5cb08e1b2a1feb6dd2e8a4b430ee83"
+    },
+    "Q1EN.COM": {
+      "bytes": 7006,
+      "sha256": "18a194a80236a700c9e043cf436ad56e4bf7c92eaf739e9a326a4d2cd3ea932b"
+    },
+    "Q2ES.DAT": {
+      "bytes": 114688,
+      "sha256": "07843341860e251793949f3b09c19c536dac332ac1fa2c0f1212167df0ea49de"
+    },
+    "SC5.DAT": {
+      "bytes": 594016,
+      "sha256": "7b9a9a479a9363e5d627723b61d0f2194293477ef091870eb78a12ce4e624088"
+    },
+    "SC5.IDX": {
+      "bytes": 16384,
+      "sha256": "3ef404392e6b29db7b074e3745b45fa85832aefc4c7e039221133ab6b4b685a8"
+    },
+    "Q2ES.COM": {
+      "bytes": 7231,
+      "sha256": "742c8b64bae560d685dedc78bddbc319d3b1b9230318a77ba16f9eb609c18503"
+    },
+    "Q2EN.DAT": {
+      "bytes": 114688,
+      "sha256": "e4042203efb6dcb48f5505692dffea9ab7403dc87543cd31563a2bcedd5b1b03"
+    },
+    "Q2EN.COM": {
+      "bytes": 7216,
+      "sha256": "09d9931d31e724aeeefe1d1712ddddaef8b18019df8bc739e6f566bdd41187aa"
+    },
+    "QMENU.COM": {
+      "bytes": 900,
+      "sha256": "49fdcf582d41abbf7ada6cf31e8974fd7da4bb2b3bc81eb28a25573a5571a564"
+    },
+    "QUIJOTE.BAT": {
+      "bytes": 32,
+      "sha256": "40778f27055a62d177c151635ec79fd0f7d237952523325530e365e679ba4ca2"
+    },
+    "QUIXOTE.BAT": {
+      "bytes": 32,
+      "sha256": "fd44804326d308af4b2eebb32ef5cd9edb04e00fce34fc95c0e9641922ac4ab8"
+    }
+  },
+  "sd_file_bytes": 12247906,
+  "sample_rate": 8000
+}

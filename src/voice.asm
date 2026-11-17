@@ -1,22 +1,13 @@
 ; Resident speech API. Caller has BIOS in page 0 and original game RAM in
-; page 1. Mapper and OPL4 memory transfers run with DI. Playback restores
-; page 1 and keeps DI while polling FT1. OPL4 PCM 0/1 and timer 1 belong here.
+; page 1. ROM and OPL4 memory transfers run with DI. Playback restores page 1
+; and enables BIOS keyboard interrupts. OPL4 PCM 0/1 and timer 1 belong here.
 ; Cache: PCM cores in 200800..3FDFFF; generation-tagged addresses at 3FE000.
 ; Each occurrence has a separate header pointing into the same cached core,
 ; with event-specific zero padding. No waveform is duplicated for padding.
     include "../build/voice-config.inc"
 VSEQ equ 0F000h
 
-; The original parser only accepts uppercase ASCII. Cartridge cold boot does
-; not force CAPS, so normalize letters while preserving space/control keys.
-voice_input:
-    call 009Fh
-    cp 'a'
-    ret c
-    cp 'z'+1
-    ret nc
-    sub 32
-    ret
+    include "../../common/command_input.asm"
 
 voice_text:
     ld (v_text),hl
@@ -361,7 +352,7 @@ v_restore:
     di
     ret
 
-; Sequential score reader across mapper segments. Preserves BC/DE/HL.
+; Sequential byte reader, including ASCII16 bank crossings. Preserves BC/DE/HL.
 v_get:
     push hl
     ld hl,(v_src)
@@ -413,8 +404,7 @@ v_cache_store:
     out (07Fh),a
     ret
 
-; Decode one independently initialized IMA block directly into sample RAM.
-; The predictor is biased by 8000h, making signed saturation unsigned carry.
+; Copy one prepared signed-PCM unit, including its silence margins, into wave RAM.
 v_decode:
     ld hl,(v_free)
     ld a,(v_free+2)

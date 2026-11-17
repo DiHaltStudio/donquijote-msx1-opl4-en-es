@@ -1,8 +1,9 @@
-; Resident DOS bridge. E000..F2FF is above both games' CLEAR limits.
-; Game loading images are mapped in page 1 only during copies, under DI.
+; Resident cartridge bridge. E000..F2FF is above both games' CLEAR limits.
+; ROM is visible in page 1 only during copies, with interrupts disabled.
 ; Original program/data remain in their original RAM addresses.
 JOINED equ 1
 VOICE equ 1
+BRAND_DOS equ 1
 ENGLISH equ 0
 BANK_MAP equ 0F100h           ; logical -> allocated physical mapper segments
     org 0E000h
@@ -155,6 +156,7 @@ next_file:
     call copy_rom
 entry_operand:
     call 0
+    call cover_after_entry
     ; SLOT's return is followed by the exact equivalent of loader BASIC line 3.
     ld hl,(entry_operand+1)
     ld de,09000h
@@ -337,5 +339,7 @@ transition_b:
 runtime_dos_version: db 1
 runtime_dos_pages: ds 4,0
     endif
+COVER_ENTRY equ 08800h
+    include "../../common/cover_wait.asm"
     include "../build/files.inc"
     assert $ <= 0F000h

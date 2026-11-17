@@ -183,14 +183,38 @@ own configuration afterwards.
 
 ## Language and part selection
 
-QUIJOTE.COM uses Spanish resource names; QUIXOTE.COM uses English names. Both
-share BRAND.DAT, VRAM.DAT and VRAM.IDX. English localization repacks text,
+QUIJOTE.BAT selects Spanish and QUIXOTE.BAT English. QMENU.COM displays
+version 2.0 and chooses Q1ES/Q1EN.COM for MSX1 or Q2ES/Q2EN.COM for MSX2.
+MSX1 uses GAME.DAT and ENGAME.DAT; MSX2 uses Q2ES.DAT and Q2EN.DAT.
+Both languages share BRAND.DAT, VRAM.DAT/IDX and SC5.DAT/IDX; each language's
+speech files serve both graphics options. English localization repacks text,
 objects and vocabulary within the original reserved areas. Exact English
-aliases prevent ambiguities such as FIGHT/LIGHT. The BASIC bootstrap tail and
-fixed early-line addresses remain intact.
+aliases prevent ambiguities such as FIGHT/LIGHT. The BASIC bootstrap tail
+and fixed early-line addresses remain intact.
 
 After the introduction, empty RETURN starts part A. Either language's classic
 password starts B from the loading picture. Spaces and letter case are ignored;
 Backspace edits the input. Finishing A reaches B through the original ending
 condition. Cassette save/load remains unchanged; there is no general resume-code
 system or SD save-file facility.
+
+## Command input boundary
+
+`common/command_input.asm` caps commands at 31 characters, including spaces.
+It compares the write pointer at 738Ch with the buffer base at 738Eh before
+returning a printable character to the original editor. Extra characters are
+discarded; Backspace and ENTER remain available at the limit. The MSX2 renderer
+honours the original limit at 7060h: 32 normally, 33 while drawing the cursor.
+This prevents a cursor wrap from restarting the input column.
+
+## MSX2 graphics
+
+The native driver in `src/msx2/native.asm` uses SCREEN 5 and an original-font
+atlas derived from the supplied tape. HMMM copies glyphs and scrolls text;
+HMMV clears rows; HMMC uploads a picture to the hidden page. Page and palette
+switching precede description and narration. Black and white retain indexes
+0 and 15. Indexed sources and exact palettes are in `assets/msx2/`.
+
+The bilingual illustrated references, `docs/technical/TECNICA-es.pdf/html`
+and `docs/technical/TECNICA-en.pdf/html`, describe formats, memory, caches,
+startup and both graphics options in detail.

@@ -1,6 +1,6 @@
-# Don Quijote / Don Quixote — MSX1 + OPL4
+# Don Quijote / Don Quixote — MSX1 / MSX2 + OPL4
 
-**The 1987 adventure, with spoken descriptions and responses, fast picture loading, and both parts joined together. In Spanish and English.**
+**The 1987 adventure, with spoken descriptions and responses, fast picture loading, linked parts and selectable MSX1/MSX2 graphics. In Spanish and English.**
 
 An unofficial homage adaptation by **DiHalt Studio**, 2026.
 
@@ -33,9 +33,11 @@ Prepare Alonso Quijano for knighthood, explore La Mancha, and continue his journ
 
 At startup, a memory report shows compatible mapper RAM, OPL4 sample RAM and RAM reserved for the game. Press RETURN to continue when the requirements are met. If a requirement is missing, the program explains the problem and returns to DOS. The game banks must belong to one compatible mapper; two separate 256 KiB mappers do not add up to the required 512 KiB.
 
+Commands accept one line of **31 characters including spaces**. Extra characters are ignored; Backspace and ENTER remain available. Each part's opening waits for a new key.
+
 ## What is this?
 
-This edition keeps the original MSX adventure and illustrations. It adds OPL4 narration, replaces incremental drawing with picture blocks loaded from storage, links the two parts, and provides an English translation with English commands and a Northern British voice. Spanish narration uses a voice from Spain. Each language has its own executable; both support DOS1 and DOS2/Nextor.
+This edition keeps the original MSX adventure. Choose the original illustrations on MSX1 or enhanced illustrations and a recoloured opening on MSX2. It adds OPL4 narration, replaces incremental drawing with picture blocks loaded from storage, links the two parts, and provides an English translation with English commands and a Northern British voice. Spanish narration uses a voice from Spain. Each language has MSX1 and MSX2 executables; all four support DOS1 and DOS2/Nextor. Both BAT launchers open the same graphics selector, labelled version 2.0.
 
 Speech plays from prepared sample blocks and timing scores; the MSX does not synthesize speech from arbitrary text. Original cassette save/load commands remain cassette operations. The initial password selects part two, not an intermediate saved position.
 
@@ -55,17 +57,17 @@ python3 -m venv .venv
 # Put your two original TSX files in third_party/original/.
 make import-graphics RELEASE_DIR=/path/to/downloaded/package PYTHON=.venv/bin/python
 make PYTHON=.venv/bin/python
-make release PYTHON=.venv/bin/python VERSION=1.01
+make release PYTHON=.venv/bin/python VERSION=2.0
 ```
 
-Install **sjasm 0.42c** separately; `sjasmplus` is a different assembler. `make` creates `build/SD/`, and `make release` creates one bilingual ZIP. `make manual` rebuilds both PDF manuals with Tectonic. `make help` lists the targets. Downloaded packages run directly on the MSX; no source build is required to play.
+Install **sjasm 0.42c** separately; `sjasmplus` is a different assembler. `make` rebuilds the 31 runtime files in `build/SD/` and refreshes the bilingual package and ZIP under `release/`; `make release` does the same. `make manual` rebuilds both PDF manuals with Tectonic. `make help` lists the targets. Downloaded packages run directly on the MSX; no source build is required to play.
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `src/` | DOS loader, mapper bridge, disk I/O and OPL4 player |
-| `common/` | Introduction and initial password selector |
+| `src/` and `src/msx2/` | MSX1/MSX2 loaders, mapper bridge, disk I/O, OPL4 player and MSX2 graphics driver |
+| `common/` | Introduction, password selector, graphics menu and input protection |
 | `assets/` | Speech blocks and scores, English translation, DiHalt presentation |
 | `tools/` | Extraction, localization, graphics preparation, build and packaging |
 | `docs/DESIGN.md` | Memory, storage, picture and speech architecture |
@@ -89,3 +91,14 @@ An unofficial adaptation made for study, preservation and homage, without affili
 Please fork or push PR if you want to improve this game!
 
 Tools include Python, sjasm, Pillow, Tectonic/LaTeX, openMSX and Piper. See [voice attribution](VOICE-NOTICE.txt) and [manual sources](docs/manual/SOURCES.md).
+
+## Technical reference 2.0
+
+[Español PDF](docs/technical/TECNICA-es.pdf) · [HTML](docs/technical/TECNICA-es.html)
+
+[English PDF](docs/technical/TECNICA-en.pdf) · [HTML](docs/technical/TECNICA-en.html)
+
+The reference covers the public DOS game files, both graphics options, memory,
+PCM banks, scores, caches and the startup flow. Editable texts and localized
+diagrams are in `docs/technical/`. Run `make technical-docs` after installing
+`requirements-docs.txt` in a local Python environment.

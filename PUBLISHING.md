@@ -1,32 +1,13 @@
-# Publishing
+# Publishing version 2.0
 
 Repository: https://github.com/DiHaltStudio/donquijote-msx1-opl4-en-es
 
-The source folder is prepared without Git history. Initialize and publish it
-when ready:
+Run `make release VERSION=2.0` with the original inputs described in
+`docs/BUILDING.md`. The outputs under `release/` are ignored by Git.
+Commit source and documentation changes, then push the main branch.
 
-```sh
-git init -b main
-git add .
-git status --short
-git commit -m "Initial bilingual MSX-DOS OPL4 edition"
-git remote add origin https://github.com/DiHaltStudio/donquijote-msx1-opl4-en-es.git
-git push -u origin main
-```
-
-The ignore rules keep original inputs, extracted game data, build intermediates
-and release payloads out of the source repository. Review the staged file list
-before committing. Do not force-add those ignored directories.
-
-For the downloadable release:
-
-- Tag: `v1.01`.
-- Title: **Don Quijote / Don Quixote — MSX-DOS + OPL4 v1.01**.
-- Description: use `RELEASE-NOTES.md`.
-- Attach `release/donquijote-msx1-opl4-en-es-1.01.zip` and `release/SHA256SUMS`.
-- Optionally attach the two PDFs from `docs/manual/` separately; they are also
-  included in the ZIP.
-
-The ZIP contains the playable bilingual package. GitHub's automatically created
-source archives contain the build sources and require the separate original
-inputs described in `docs/BUILDING.md`.
+Create tag `v2.0` at that commit. Use `RELEASE-NOTES.md` as the description.
+Attach the generated ZIP, SHA256SUMS and the six documents in its DOCS folder.
+Original tapes, extracted game records, system ROMs and DOS kernels stay outside
+the source repository. The downloadable ZIP contains the playable game package;
+GitHub's automatic source archives contain its build sources.

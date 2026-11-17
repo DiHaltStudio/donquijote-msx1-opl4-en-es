@@ -5,6 +5,7 @@ from pathlib import Path
 from extract_tsx import extract
 from localize import localize
 from game_blocks import build_game
+from native_game import assets as native_assets,transform_game,native_config
 ROOT=Path(__file__).resolve().parents[1]
 def sha(data):return hashlib.sha256(data).hexdigest()
 def originals(folder):
@@ -51,29 +52,43 @@ def voice(language,out,disk):
     (disk/'INDEX.DAT').write_bytes(index.ljust(16384,b'\0'))
     (disk/'SCORES.DAT').write_bytes(scores.ljust(32768,b'\0'))
     (out/'voice-config.inc').write_text(f'VOICE_CATALOG_BANK equ 16\nVOICE_MESSAGES equ 04000h\nVOICE_MESSAGE_COUNT equ {len(messages)}\nVOICE_UNITS equ {unit_address}\nVOICE_UNIT_COUNT equ {len(units)}\n')
-def build(language,pictures):
-    out=ROOT/'build'/language;disk=out/'disk';disk.mkdir(parents=True,exist_ok=True)
+def build(language,pictures,model=1):
+    out=ROOT/'build'/(language if model==1 else 'msx2-'+language);disk=out/'disk'
+    if disk.exists():shutil.rmtree(disk)
+    disk.mkdir(parents=True)
     extracted=ROOT/'build/extracted'
     if language=='en':
         localize(extracted,out/'extracted');extracted=out/'extracted'
     voice(language,out,disk);build_game(extracted,out,disk)
     for name,data in pictures.items():(disk/name).write_bytes(data)
     shutil.copyfile(ROOT/'build/branding/BRAND.DAT',disk/'BRAND.DAT')
+    if model==2:
+        blob,idx,offsets=native_assets(ROOT/'build/extracted')
+        (disk/'VRAM.DAT').write_bytes(blob)
+        (disk/'VRAM.IDX').write_bytes(idx.ljust(16384,b'\0'))
+        entries=transform_game(out)
     stage=out/'src';stage.mkdir(exist_ok=True)
-    for path in (ROOT/'src').glob('*.asm'):
+    for path in (ROOT/'src'/('msx2' if model==2 else '')).glob('*.asm'):
         content=path.read_text().replace('../build/',str(out)+'/').replace('../../common/',str(ROOT/'common')+'/')
+        if model==2:content=content.replace('../common/',str(ROOT/'common/msx2')+'/')
         if language=='en':
             content=content.replace('ENGLISH equ 0','ENGLISH equ 1')
             if path.name=='loader.asm':
                 for old,new in [('GAME    DAT','ENGAME  DAT'),('INDEX   DAT','ENINDEX DAT'),('SCORES  DAT','ENSCORE DAT'),('VOICE0  PCM','ENVOX0  PCM'),('DON QUIJOTE','DON QUIXOTE'),('Cargando datos...','Loading data...')]:content=content.replace(old,new)
+        if model==2 and path.name=='loader.asm':
+            content=content.replace('ENGAME  DAT' if language=='en' else 'GAME    DAT','Q2EN    DAT' if language=='en' else 'Q2ES    DAT').replace('VRAM    DAT','SC5     DAT').replace('VRAM    IDX','SC5     IDX')
         (stage/path.name).write_text(content)
-    for name in ['trampoline','resident','loader']:
+    if model==2:native_config(stage,out,entries,offsets)
+    for name in ([] if model==2 else ['trampoline','resident','loader']):
         subprocess.run([os.environ.get('SJASM','sjasm'),'-s',str(stage/f'{name}.asm'),str(out/f'{name}.bin')],check=True)
     (disk/'QUIJOTE.COM').write_bytes((out/'loader.bin').read_bytes())
     if language=='en':
         for p in list(disk.iterdir()):
             new={'QUIJOTE.COM':'QUIXOTE.COM','GAME.DAT':'ENGAME.DAT','INDEX.DAT':'ENINDEX.DAT','SCORES.DAT':'ENSCORE.DAT'}.get(p.name,p.name.replace('VOICE','ENVOX'))
             if new!=p.name:p.replace(disk/new)
+    if model==2:
+        for old,new in [('ENGAME.DAT' if language=='en' else 'GAME.DAT','Q2EN.DAT' if language=='en' else 'Q2ES.DAT'),('VRAM.DAT','SC5.DAT'),('VRAM.IDX','SC5.IDX')]:
+            (disk/old).replace(disk/new)
     return disk
 
 def main():
@@ -82,13 +97,21 @@ def main():
     if a.extract_only:return
     images=graphics(a.graphics)
     subprocess.run([sys.executable,str(ROOT/'tools/build_branding.py')],check=True)
-    shared=ROOT/'build/SD';shared.mkdir(exist_ok=True);files={}
-    for language in ['es','en']:
-        for item in build(language,images).iterdir():
-            data=item.read_bytes()
-            if item.name in files:assert files[item.name]['sha256']==sha(data)
-            files[item.name]=dict(bytes=len(data),sha256=sha(data));(shared/item.name).write_bytes(data)
-    assert len(files)==22
-    (ROOT/'build/manifest.json').write_text(json.dumps(dict(files=files,sd_file_bytes=sum(x['bytes'] for x in files.values())),indent=2)+'\n')
+    subprocess.run([sys.executable,str(ROOT/'tools/build_dos_menu.py')],check=True)
+    shared=ROOT/'build/SD'
+    if shared.exists():shutil.rmtree(shared)
+    shared.mkdir(exist_ok=True);files={}
+    def add(name,path):
+        data=path.read_bytes()
+        if name in files:assert files[name]['sha256']==sha(data),name
+        files[name]=dict(bytes=len(data),sha256=sha(data));(shared/name).write_bytes(data)
+    for model in [1,2]:
+        for language in ['es','en']:
+            for item in build(language,images,model).iterdir():
+                name=f'Q{model}{language.upper()}.COM' if item.name in ['QUIJOTE.COM','QUIXOTE.COM'] else item.name
+                add(name,item)
+    for name in ['QMENU.COM','QUIJOTE.BAT','QUIXOTE.BAT']:add(name,ROOT/'build/launcher'/name)
+    assert len(files)==31
+    (ROOT/'build/manifest.json').write_text(json.dumps(dict(version='2.0',files=files,sd_file_bytes=sum(x['bytes'] for x in files.values())),indent=2)+'\n')
     print(f'Built both languages: {len(files)} files in build/SD')
 if __name__=='__main__':main()

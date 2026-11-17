@@ -1,0 +1,468 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Don Quixote · Technical reference 2.0</title><style>@page { size:A4; margin:18mm 17mm 20mm; @bottom-left {content:"Don Quixote · Technical reference";font-size:8pt;color:#627489} @bottom-right {content:counter(page);font-size:8pt;color:#627489} }
+*{box-sizing:border-box}body{margin:0;background:#edf2f6;color:#193047;font:16px/1.65 'DejaVu Sans',sans-serif}main{max-width:1050px;margin:auto;padding:55px;background:#fff}h1{font-size:2.4em;line-height:1.2;color:#154e70;border-bottom:4px solid #d99235;padding-bottom:.3em}h2{font-size:1.6em;color:#155c79;margin-top:2.4em;border-bottom:1px solid #d2dde5}h3{font-size:1.13em;color:#376b78}h1,h2,h3{break-after:avoid}p,li{orphans:3;widows:3}a{color:#075f8c}code{font:0.88em 'DejaVu Sans Mono',monospace;overflow-wrap:anywhere}pre{padding:16px;background:#f0f5f8;border-left:4px solid #d99235;white-space:pre-wrap;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:.88em}th,td{border:1px solid #d2dde5;text-align:left;padding:8px;vertical-align:top;overflow-wrap:anywhere}th{background:#e6eff5;color:#184c6c}tr:nth-child(even){background:#f7fafc}img{max-width:100%;height:auto;display:block;margin:18px auto;break-inside:avoid}blockquote{margin:1.5em 0;padding:12px 20px;background:#fff5e7;border-left:4px solid #d99235}hr{border:0;border-top:1px solid #d4dfe7}.toc{font-size:.9em;background:#f4f8fa;padding:20px}.toc ul{padding-left:20px}strong{color:#183f58}
+@media print{body{background:white;font-size:10pt;line-height:1.42}main{padding:0;max-width:none}h1{font-size:27pt}h2{font-size:16pt;margin-top:1.5em;break-before:auto}h2:not(:first-child){padding-top:3mm}h3{font-size:11.5pt}table{font-size:8.2pt}th,td{padding:4px}thead{display:table-header-group}tr{break-inside:avoid}img{max-height:170mm;object-fit:contain}pre{font-size:8.2pt;break-inside:avoid}.toc{font-size:8.2pt;padding:12px}a{text-decoration:none}}
+</style></head><body><main><h1 id="don-quijote-don-quixote-technical-reference">Don Quijote / Don Quixote: technical reference</h1>
+<p><strong>Version 2.0 · MSX-DOS edition · MSX1 and MSX2 · Spanish and English · OPL4</strong></p>
+<p>This reference describes the programs and files in the public distribution: language and video selection, loading both parts, memory, pictures and speech playback. The player manuals cover installation and commands; this document explains how the same package works. Public source and build instructions are available from the <a href="https://github.com/DiHaltStudio/donquijote-msx1-opl4-en-es">DiHalt Studio repository</a>.</p>
+<div class="toc"><span class="toctitle">Contents</span><ul>
+<li><a href="#don-quijote-don-quixote-technical-reference">Don Quijote / Don Quixote: technical reference</a><ul>
+<li><a href="#1-one-distribution-and-four-programs">1. One distribution and four programs</a></li>
+<li><a href="#2-shared-files-and-storage-budget">2. Shared files and storage budget</a></li>
+<li><a href="#3-three-memories-with-different-purposes">3. Three memories with different purposes</a></li>
+<li><a href="#4-initial-report-and-ram-allocation">4. Initial report and RAM allocation</a></li>
+<li><a href="#5-segments-and-workspace">5. Segments and workspace</a></li>
+<li><a href="#6-a-disk-read-and-its-return">6. A disk read and its return</a></li>
+<li><a href="#7-what-a-speech-unit-contains">7. What a speech unit contains</a></li>
+<li><a href="#8-text-keys-and-the-unit-index">8. Text keys and the unit index</a></li>
+<li><a href="#9-scores-six-byte-events">9. Scores: six-byte events</a></li>
+<li><a href="#10-caching-in-opl4-ram">10. Caching in OPL4 RAM</a></li>
+<li><a href="#11-mapper-cache-latency-and-playback-clock">11. Mapper cache, latency and playback clock</a></li>
+<li><a href="#12-msx1-pictures">12. MSX1 pictures</a></li>
+<li><a href="#13-msx2-pictures-and-font">13. MSX2 pictures and font</a></li>
+<li><a href="#14-introduction-password-and-linked-parts">14. Introduction, password and linked parts</a></li>
+<li><a href="#15-public-documents-and-resources">15. Public documents and resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="1-one-distribution-and-four-programs">1. One distribution and four programs</h2>
+<p>The <code>SD/</code> folder contains both graphics options in both languages. Keep all its files together. <code>QUIJOTE.BAT</code> runs <code>QMENU ES</code>; <code>QUIXOTE.BAT</code> runs <code>QMENU EN</code>. The selector reads a line containing 1, 2 or 0: MSX1, MSX2 or exit. The MSX1 option also runs on later machines; the MSX2 option requires that video generation or later.</p>
+<p><img alt="Language and program selection" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDM5MCIgcm9sZT0iaW1nIj48dGl0bGU+MDEgwrcgVHdvIGxhbmd1YWdlcywgdHdvIGdyYXBoaWNzIG9wdGlvbnM8L3RpdGxlPjxkZWZzPjxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iOSIgbWFya2VySGVpZ2h0PSI5IiByZWZYPSI4IiByZWZZPSI0IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0wLDAgTDgsNCBMMCw4IiBmaWxsPSIjNDE2MDc1Ii8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY4ZmIiLz48c3R5bGU+dGV4dHtmb250LWZhbWlseTpEZWphVnUgU2FucyxzYW5zLXNlcmlmO2ZpbGw6IzE5MzU0YX0udGl0bGV7Zm9udC1zaXplOjIxcHg7Zm9udC13ZWlnaHQ6Ym9sZH0udGV4dHtmb250LXNpemU6MTZweH08L3N0eWxlPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iMjUiIHk9IjM0Ij4wMSDCtyBUd28gbGFuZ3VhZ2VzLCB0d28gZ3JhcGhpY3Mgb3B0aW9uczwvdGV4dD48cmVjdCB4PSIzMCIgeT0iNzAiIHdpZHRoPSI0MjUiIGhlaWdodD0iOTAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTc2ZTkxIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSI5OSI+UVVJSk9URS5CQVQg4oaSIFFNRU5VIEVTPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMTI3Ij5TcGFuaXNoIHRleHQsIGNvbW1hbmRzIGFuZCBzcGVlY2g8L3RleHQ+PHJlY3QgeD0iNTQ1IiB5PSI3MCIgd2lkdGg9IjQyNSIgaGVpZ2h0PSI5MCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZjhlMjYiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNTYwIiB5PSI5OSI+UVVJWE9URS5CQVQg4oaSIFFNRU5VIEVOPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NjAiIHk9IjEyNyI+RW5nbGlzaCB0ZXh0LCBjb21tYW5kcyBhbmQgc3BlZWNoPC90ZXh0PjxyZWN0IHg9IjMwIiB5PSIyNTAiIHdpZHRoPSI0MjUiIGhlaWdodD0iOTUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMzQ4NTZkIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSIyNzkiPjEg4oaSIE1TWDEgb3IgbGF0ZXI8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQ1IiB5PSIzMDciPlExRVMuQ09NIC8gUTFFTi5DT008L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQ1IiB5PSIzMzIiPk9yaWdpbmFsIHBpY3R1cmVzPC90ZXh0PjxyZWN0IHg9IjU0NSIgeT0iMjUwIiB3aWR0aD0iNDI1IiBoZWlnaHQ9Ijk1IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzg0NWI5ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI1NjAiIHk9IjI3OSI+MiDihpIgTVNYMiBvciBsYXRlcjwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNTYwIiB5PSIzMDciPlEyRVMuQ09NIC8gUTJFTi5DT008L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjU2MCIgeT0iMzMyIj5JbXByb3ZlZCBpbGx1c3RyYXRpb25zPC90ZXh0PjxwYXRoIGQ9Ik0yNDAsMTYwIEwyNDAsMjUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM0MTYwNzUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz48cGF0aCBkPSJNNzYwLDE2MCBMNzYwLDI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PHBhdGggZD0iTTQ1MCwxNjAgTDU0NSwyNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjxwYXRoIGQ9Ik01NTAsMTYwIEw0NTUsMjUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM0MTYwNzUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz48L3N2Zz4=" /></p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>MSX1 option</th>
+<th>MSX2 option</th>
+<th>Adventure data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spanish</td>
+<td>Q1ES.COM</td>
+<td>Q2ES.COM</td>
+<td>GAME.DAT / Q2ES.DAT</td>
+</tr>
+<tr>
+<td>English</td>
+<td>Q1EN.COM</td>
+<td>Q2EN.COM</td>
+<td>ENGAME.DAT / Q2EN.DAT</td>
+</tr>
+</tbody>
+</table>
+<p>Each program includes both parts. Choosing MSX1 or MSX2 changes the graphics presentation, not the structure of the adventure or its narration. The programs retain file operations compatible with DOS1 and DOS2/Nextor; a separate executable is not needed for each operating system.</p>
+<p>The selector opens the chosen COM through an FCB, reads it into temporary storage from 8000h, and closes the file. A small trampoline at C000h then copies those bytes to 0100h and transfers control. This prevents the selector from overwriting itself while it is still executing its read. The command tail is emptied and the DMA address restored to 0080h before the loader starts. The selected COM must be smaller than 16 KiB.</p>
+<p>The BAT files do not use <code>CHOICE</code> or <code>ERRORLEVEL</code>: selection and transfer are handled by <code>QMENU.COM</code>. When upgrading, remove old <code>QUIJOTE.COM</code> and <code>QUIXOTE.COM</code> files. The command interpreter finds a COM before a BAT with the same name.</p>
+<h2 id="2-shared-files-and-storage-budget">2. Shared files and storage budget</h2>
+<p>There are not four copies of the speech. Both Spanish programs share one bank and both English programs another. <code>BRAND.DAT</code> serves all four. Each graphics bank is shared between languages, but the MSX1 and MSX2 pictures have different formats and retain their own files.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Bytes</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BRAND.DAT</code></td>
+<td>49,152</td>
+<td>Presentation and fanfare</td>
+</tr>
+<tr>
+<td><code>ENGAME.DAT</code></td>
+<td>114,688</td>
+<td>Adventure data</td>
+</tr>
+<tr>
+<td><code>ENINDEX.DAT</code></td>
+<td>16,384</td>
+<td>Keys and unit index</td>
+</tr>
+<tr>
+<td><code>ENSCORE.DAT</code></td>
+<td>32,768</td>
+<td>Timing scores</td>
+</tr>
+<tr>
+<td><code>ENVOX0.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>ENVOX1.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>ENVOX2.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>ENVOX3.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>ENVOX4.PCM</code></td>
+<td>360,448</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>GAME.DAT</code></td>
+<td>114,688</td>
+<td>Adventure data</td>
+</tr>
+<tr>
+<td><code>INDEX.DAT</code></td>
+<td>16,384</td>
+<td>Keys and unit index</td>
+</tr>
+<tr>
+<td><code>Q1EN.COM</code></td>
+<td>7,006</td>
+<td>Game program</td>
+</tr>
+<tr>
+<td><code>Q1ES.COM</code></td>
+<td>7,025</td>
+<td>Game program</td>
+</tr>
+<tr>
+<td><code>Q2EN.COM</code></td>
+<td>7,216</td>
+<td>Game program</td>
+</tr>
+<tr>
+<td><code>Q2EN.DAT</code></td>
+<td>114,688</td>
+<td>Adventure data</td>
+</tr>
+<tr>
+<td><code>Q2ES.COM</code></td>
+<td>7,231</td>
+<td>Game program</td>
+</tr>
+<tr>
+<td><code>Q2ES.DAT</code></td>
+<td>114,688</td>
+<td>Adventure data</td>
+</tr>
+<tr>
+<td><code>QMENU.COM</code></td>
+<td>900</td>
+<td>Version selector</td>
+</tr>
+<tr>
+<td><code>QUIJOTE.BAT</code></td>
+<td>32</td>
+<td>Language launcher</td>
+</tr>
+<tr>
+<td><code>QUIXOTE.BAT</code></td>
+<td>32</td>
+<td>Language launcher</td>
+</tr>
+<tr>
+<td><code>SC5.DAT</code></td>
+<td>594,016</td>
+<td>MSX2 pictures and font</td>
+</tr>
+<tr>
+<td><code>SC5.IDX</code></td>
+<td>16,384</td>
+<td>MSX2 index and driver</td>
+</tr>
+<tr>
+<td><code>SCORES.DAT</code></td>
+<td>32,768</td>
+<td>Timing scores</td>
+</tr>
+<tr>
+<td><code>VOICE0.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VOICE1.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VOICE2.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VOICE3.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VOICE4.PCM</code></td>
+<td>1,048,576</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VOICE5.PCM</code></td>
+<td>917,504</td>
+<td>Shared speech PCM</td>
+</tr>
+<tr>
+<td><code>VRAM.DAT</code></td>
+<td>270,336</td>
+<td>MSX1 pictures</td>
+</tr>
+<tr>
+<td><code>VRAM.IDX</code></td>
+<td>16,384</td>
+<td>MSX1 picture index</td>
+</tr>
+</tbody>
+</table>
+<p>The 31 game files total <strong>12,247,906 bytes</strong>, approximately <strong>11.68 MiB</strong>, excluding directory space and filesystem allocation rounding. KiB means 1,024 bytes and MiB 1,048,576 bytes. The PDF and HTML files in <code>DOCS/</code> are read on another computer and do not participate in game execution.</p>
+<p>Indexes and some other files are padded to 16 KiB boundaries. Their file sizes include this padding; the useful PCM figures in the speech table do not. These numbers answer different questions: disk capacity versus sound content.</p>
+<p>The manifest identifies files by name, length and SHA-256. Replacing a waveform without updating its index can cause a different sound to be read at that offset. Changing text without a matching key and score can leave that phrase without narration. The distribution unit is the coherent set, not an isolated COM.</p>
+<h2 id="3-three-memories-with-different-purposes">3. Three memories with different purposes</h2>
+<p><img alt="Storage, Z80 RAM and OPL4 RAM" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDMwMCIgcm9sZT0iaW1nIj48dGl0bGU+MDIgwrcgVGhyZWUgZGlmZmVyZW50IG1lbW9yaWVzPC90aXRsZT48ZGVmcz48bWFya2VyIGlkPSJhcnJvdyIgbWFya2VyV2lkdGg9IjkiIG1hcmtlckhlaWdodD0iOSIgcmVmWD0iOCIgcmVmWT0iNCIgb3JpZW50PSJhdXRvIj48cGF0aCBkPSJNMCwwIEw4LDQgTDAsOCIgZmlsbD0iIzQxNjA3NSIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmOGZiIi8+PHN0eWxlPnRleHR7Zm9udC1mYW1pbHk6RGVqYVZ1IFNhbnMsc2Fucy1zZXJpZjtmaWxsOiMxOTM1NGF9LnRpdGxle2ZvbnQtc2l6ZToyMXB4O2ZvbnQtd2VpZ2h0OmJvbGR9LnRleHR7Zm9udC1zaXplOjE2cHh9PC9zdHlsZT48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjI1IiB5PSIzNCI+MDIgwrcgVGhyZWUgZGlmZmVyZW50IG1lbW9yaWVzPC90ZXh0PjxyZWN0IHg9IjI1IiB5PSI4MCIgd2lkdGg9IjI5MCIgaGVpZ2h0PSIxNjAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTc2ZTkxIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQwIiB5PSIxMDkiPkRpc2sgLyBTRDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDAiIHk9IjEzNyI+QWxsIGZpbGVzPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0MCIgeT0iMTYyIj5Db21wbGV0ZSB2b2NhYnVsYXJ5PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0MCIgeT0iMTg3Ij5QZXJzaXN0cyB3aXRob3V0IHBvd2VyPC90ZXh0PjxyZWN0IHg9IjM1NSIgeT0iODAiIHdpZHRoPSIyOTAiIGhlaWdodD0iMTYwIiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI2RmOGUyNiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSIzNzAiIHk9IjEwOSI+WjgwIFJBTTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iMzcwIiB5PSIxMzciPjUxMiBLaUIgbWFwcGVyPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIzNzAiIHk9IjE2MiI+R2FtZSwgaW5kZXhlcywgc3RhY2sgYW5kIGNhY2hlPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIzNzAiIHk9IjE4NyI+NjQgS2lCIHZpc2libGUgdGhyb3VnaCBwYWdlczwvdGV4dD48cmVjdCB4PSI2ODUiIHk9IjgwIiB3aWR0aD0iMjkwIiBoZWlnaHQ9IjE2MCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzNDg1NmQiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNzAwIiB5PSIxMDkiPk9QTDQgUkFNPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI3MDAiIHk9IjEzNyI+MiBNaUI8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjcwMCIgeT0iMTYyIj5TYW1wbGVzIGFuZCBoZWFkZXJzPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI3MDAiIHk9IjE4NyI+UmVhZCBieSB0aGUgc291bmQgY2hpcDwvdGV4dD48cGF0aCBkPSJNMzE1LDE2MCBMMzU1LDE2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PHBhdGggZD0iTTY0NSwxNjAgTDY4NSwxNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjwvc3ZnPg==" /></p>
+<p>The disk or SD stores programs, pictures and the complete vocabulary. Z80 RAM holds the adventure, variables, stacks, indexes and read cache. OPL4 RAM contains the samples and headers played by the chip. Having 2 MiB in the OPL4 does not extend executable Z80 RAM, and enlarging the mapper does not increase OPL4 wave capacity.</p>
+<p>The Z80 sees a 64 KiB address space in four 16 KiB pages. A 512 KiB mapper provides 32 segments that can appear in those windows. Slots also determine which device responds in each page. Identifying a byte requires its address, slot and segment; reading a mapper port alone does not prove that independent RAM exists behind it.</p>
+<p>The shared requirements are a compatible 512 KiB mapper and 2 MiB of OPL4 RAM. The game's banks belong to one mapper; two 256 KiB mappers are not combined. Physical segment numbers need not be consecutive. DOS itself may occupy internal RAM or a different mapper.</p>
+<h2 id="4-initial-report-and-ram-allocation">4. Initial report and RAM allocation</h2>
+<p>The loader determines the DOS version and locates the RAM arrangement it uses. Discovery covers an expanded primary slot with RAM in secondary slot 2, as in the MegaFlashROM SCC+ SD configuration. An equivalent interface needs to provide both the disk operations and the mapper arrangement expected by the loader; the presence of an SD card alone does not determine compatibility.</p>
+<p>Before opening adventure resources, the loader probes the first 32 mapper segments and the wave RAM pages. It saves the bytes used, writes different tags, reads them all, and restores the data. Writing every tag before reading any makes mirrored banks distinguishable from additional independent memory.</p>
+<p>The OPL4 probe distinguishes 64 KiB pages within its 2 MiB RAM. BUSY polling has a limit so that a missing or unresponsive interface can be reported. The report presents compatible capacity and available allocation. ENTER continues; an unmet requirement returns control to DOS with an explanation. This is an addressing probe, not an exhaustive examination of every memory cell.</p>
+<p>DOS1 keeps the game away from the system's own banks and allocates the complete cache. DOS2/Nextor obtains segments through its manager, with a minimum of sixteen for the mandatory context and up to twelve more for caching. The cache can therefore be smaller when DOS occupies more RAM, even though the physical requirement remains a 512 KiB mapper.</p>
+<h2 id="5-segments-and-workspace">5. Segments and workspace</h2>
+<p><img alt="Program logical segments" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQ5MCIgcm9sZT0iaW1nIj48dGl0bGU+MDMgwrcgTG9naWNhbCBtYXBwZXIgc2VnbWVudHM8L3RpdGxlPjxkZWZzPjxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iOSIgbWFya2VySGVpZ2h0PSI5IiByZWZYPSI4IiByZWZZPSI0IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0wLDAgTDgsNCBMMCw4IiBmaWxsPSIjNDE2MDc1Ii8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY4ZmIiLz48c3R5bGU+dGV4dHtmb250LWZhbWlseTpEZWphVnUgU2FucyxzYW5zLXNlcmlmO2ZpbGw6IzE5MzU0YX0udGl0bGV7Zm9udC1zaXplOjIxcHg7Zm9udC13ZWlnaHQ6Ym9sZH0udGV4dHtmb250LXNpemU6MTZweH08L3N0eWxlPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iMjUiIHk9IjM0Ij4wMyDCtyBMb2dpY2FsIG1hcHBlciBzZWdtZW50czwvdGV4dD48cmVjdCB4PSIzMCIgeT0iNjUiIHdpZHRoPSI5NDAiIGhlaWdodD0iNDUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTc2ZTkxIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSI5NCI+PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDgiIHk9Ijk0Ij404oCTNzwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iMTg1IiB5PSI5NCI+QWR2ZW50dXJlPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI4MDAiIHk9Ijk0Ij42NCBLaUI8L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjEyMSIgd2lkdGg9Ijk0MCIgaGVpZ2h0PSI0NSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNkZjhlMjYiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDUiIHk9IjE1MCI+PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDgiIHk9IjE1MCI+OOKAkzE0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIxODUiIHk9IjE1MCI+TG9hZGluZyBpbWFnZXMgZm9yIGJvdGggcGFydHM8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjgwMCIgeT0iMTUwIj4xMTIgS2lCPC90ZXh0PjxyZWN0IHg9IjMwIiB5PSIxNzciIHdpZHRoPSI5NDAiIGhlaWdodD0iNDUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMzQ4NTZkIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSIyMDYiPjwvdGV4dD48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ4IiB5PSIyMDYiPjE1PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIxODUiIHk9IjIwNiI+RE9TIGJyaWRnZSBhbmQgdHJhbnNmZXI8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjgwMCIgeT0iMjA2Ij4xNiBLaUI8L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjIzMyIgd2lkdGg9Ijk0MCIgaGVpZ2h0PSI0NSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM4NDViOWUiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDUiIHk9IjI2MiI+PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDgiIHk9IjI2MiI+MTY8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjE4NSIgeT0iMjYyIj5TcGVlY2gga2V5cyBhbmQgdW5pdCBpbmRleDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iODAwIiB5PSIyNjIiPjE2IEtpQjwvdGV4dD48cmVjdCB4PSIzMCIgeT0iMjg5IiB3aWR0aD0iOTQwIiBoZWlnaHQ9IjQ1IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzY1Nzk4YiIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0NSIgeT0iMzE4Ij48L3RleHQ+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0OCIgeT0iMzE4Ij4xN+KAkzE4PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIxODUiIHk9IjMxOCI+VGltaW5nIHNjb3JlczwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iODAwIiB5PSIzMTgiPjMyIEtpQjwvdGV4dD48cmVjdCB4PSIzMCIgeT0iMzQ1IiB3aWR0aD0iOTQwIiBoZWlnaHQ9IjQ1IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzE3NmU5MSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0NSIgeT0iMzc0Ij48L3RleHQ+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0OCIgeT0iMzc0Ij4xOTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iMTg1IiB5PSIzNzQiPlBpY3R1cmUgaW5kZXggYW5kIE1TWDIgZHJpdmVyPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI4MDAiIHk9IjM3NCI+MTYgS2lCPC90ZXh0PjxyZWN0IHg9IjMwIiB5PSI0MDEiIHdpZHRoPSI5NDAiIGhlaWdodD0iNDUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSI0MzAiPjwvdGV4dD48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ4IiB5PSI0MzAiPjIw4oCTMzE8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjE4NSIgeT0iNDMwIj5PcHRpb25hbCBkaXNrIGNhY2hlPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI4MDAiIHk9IjQzMCI+MOKAkzE5MiBLaUI8L3RleHQ+PC9zdmc+" /></p>
+<table>
+<thead>
+<tr>
+<th>Logical segments</th>
+<th>Purpose</th>
+<th style="text-align: right;">Capacity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4–7</td>
+<td>Four adventure pages</td>
+<td style="text-align: right;">65,536 B</td>
+</tr>
+<tr>
+<td>8–14</td>
+<td>Loading images for both parts</td>
+<td style="text-align: right;">114,688 B</td>
+</tr>
+<tr>
+<td>15</td>
+<td>DOS/game trampoline and transfer workspace</td>
+<td style="text-align: right;">16,384 B</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Speech keys and unit index</td>
+<td style="text-align: right;">16,384 B</td>
+</tr>
+<tr>
+<td>17–18</td>
+<td>Timing scores</td>
+<td style="text-align: right;">32,768 B</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Picture index and MSX2 driver when applicable</td>
+<td style="text-align: right;">16,384 B</td>
+</tr>
+<tr>
+<td>20–31</td>
+<td>Read cache, subject to availability</td>
+<td style="text-align: right;">Up to 196,608 B</td>
+</tr>
+</tbody>
+</table>
+<p>These are logical numbers. A table at F100h translates them into allocated physical segments. Resident code starts at E000h and the score workspace uses F000h with fewer than 256 bytes. During part selection, the editor has F200h–F23Fh. The initial stack is at F380h; BASIC later relocates it through CLEAR.</p>
+<p>The MSX2 graphics driver occupies an area from C000h, reserved by lowering BASIC's limit. Large loading images may temporarily use that space during startup; the driver is installed again before each BASIC program executes. Its prepared copy shares the picture-index segment and does not require another mandatory segment.</p>
+<p>BASIC file blocks need attention during a part change: loading images can overwrite the previous program's buffers, and RUN closes files before executing the new CLEAR. Closed descriptors are recreated in a suitable area and MEMSIZ and STKTOP are initialized again. Storage that appears free to the adventure must not be confused with a stack or descriptor still in use by BASIC.</p>
+<h2 id="6-a-disk-read-and-its-return">6. A disk read and its return</h2>
+<p><img alt="Switching between game and DOS contexts" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQxMCIgcm9sZT0iaW1nIj48dGl0bGU+MDQgwrcgRW50ZXIgRE9TIGFuZCByZXR1cm4gdG8gdGhlIGdhbWU8L3RpdGxlPjxkZWZzPjxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iOSIgbWFya2VySGVpZ2h0PSI5IiByZWZYPSI4IiByZWZZPSI0IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0wLDAgTDgsNCBMMCw4IiBmaWxsPSIjNDE2MDc1Ii8+PC9tYXJrZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY4ZmIiLz48c3R5bGU+dGV4dHtmb250LWZhbWlseTpEZWphVnUgU2FucyxzYW5zLXNlcmlmO2ZpbGw6IzE5MzU0YX0udGl0bGV7Zm9udC1zaXplOjIxcHg7Zm9udC13ZWlnaHQ6Ym9sZH0udGV4dHtmb250LXNpemU6MTZweH08L3N0eWxlPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iMjUiIHk9IjM0Ij4wNCDCtyBFbnRlciBET1MgYW5kIHJldHVybiB0byB0aGUgZ2FtZTwvdGV4dD48cmVjdCB4PSIzMCIgeT0iNzUiIHdpZHRoPSI0MjAiIGhlaWdodD0iMTEwIiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzE3NmU5MSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0NSIgeT0iMTA0Ij4xIMK3IEdhbWUg4oaSIGJyaWRnZTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjEzMiI+REk7IHNhdmUgcmVnaXN0ZXJzIGFuZCBzdGFjazwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjE1NyI+RmlsZSwgb2Zmc2V0IGFuZCBsZW5ndGg8L3RleHQ+PHJlY3QgeD0iNTUwIiB5PSI3NSIgd2lkdGg9IjQyMCIgaGVpZ2h0PSIxMTAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjU2NSIgeT0iMTA0Ij4yIMK3IERPUyBjb250ZXh0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NjUiIHk9IjEzMiI+SXRzIG93biBzbG90cywgc2VnbWVudHMgYW5kIHN0YWNrPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NjUiIHk9IjE1NyI+QkRPUyByZWFkcyBpbnRvIHRoZSB0cmFuc2ZlciBhcmVhPC90ZXh0PjxyZWN0IHg9IjU1MCIgeT0iMjY1IiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjExMCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzNDg1NmQiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNTY1IiB5PSIyOTQiPjMgwrcgUHJlcGFyZSByZXR1cm48L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjU2NSIgeT0iMzIyIj5SZWNvdmVyIHRoZSBnYW1lIHN0YWNrIGZpcnN0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NjUiIHk9IjM0NyI+RU5BU0xUIEJBU0lDIOKGkiBSQU07IG1hcHBlcjwvdGV4dD48cmVjdCB4PSIzMCIgeT0iMjY1IiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjExMCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM4NDViOWUiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDUiIHk9IjI5NCI+NCDCtyBDb250aW51ZSB0aGUgZ2FtZTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjMyMiI+UmVnaXN0ZXJzIGFuZCBjb250ZXh0IHJlc3RvcmVkPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMzQ3Ij5Vc2UgdGhlIGJ5dGVzIHJlYWQ8L3RleHQ+PHBhdGggZD0iTTQ1MCwxMzAgTDU1MCwxMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjxwYXRoIGQ9Ik03NjAsMTg1IEw3NjAsMjY1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0MTYwNzUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz48cGF0aCBkPSJNNTUwLDMyMCBMNDUwLDMyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PC9zdmc+" /></p>
+<p>The game supplies a file, offset and length. The bridge disables interrupts, saves registers and stack, and enters the shared segment. It restores DOS's slots, segments and stack, then calls BDOS. Reads arrive in a transfer area and are subsequently used as PCM, cached data or video data.</p>
+<p>On return, the game stack is recovered first. Replacing the page-1 bank before leaving a stack there could make a CALL write its return address into another memory. Slot selections and the caller's mapper are then restored. DOS2's page-1 shadow is also synchronized through its API; a port OUT does not update that operating-system information.</p>
+<p>Two levels of selection must be preserved. The original game's USR return changes primary slot register A8h and assumes BASIC remains selected in the corresponding secondary slot. A DOS operation can change a subslot hidden while RAM is visible. The bridge selects BIOS/BASIC through ENASLT first and then selects game RAM: when the USR exposes that primary slot, its secondary selection is ready.</p>
+<p>The shared FCB operations explain how the same COM supports both DOS versions. DOS1 searches the current drive root. DOS2/Nextor can use the current directory. Running a program through a full path is not equivalent to entering its folder; data files are resolved from the working directory.</p>
+<h2 id="7-what-a-speech-unit-contains">7. What a speech unit contains</h2>
+<p>The voices are distributed ready to use. Each bank contains long speech blocks with transitions and intonation, not one phoneme per letter or a universal voice capable of pronouncing arbitrary text. A phrase uses a sequence of block identifiers. The same identifier can appear in many phrases without duplicating its samples.</p>
+<p>The runtime format is mono signed 8-bit PCM at 8,000 Hz: one second takes approximately 8,000 bytes. Sample identity, position and sample count are independent of the score bytes that schedule them.</p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Prepared messages</th>
+<th>Unique keys</th>
+<th>Units</th>
+<th>PCM with margins</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spanish</td>
+<td>376</td>
+<td>350</td>
+<td>1,644</td>
+<td>6,151,573 B</td>
+</tr>
+<tr>
+<td>English</td>
+<td>376</td>
+<td>341</td>
+<td>1,341</td>
+<td>4,553,236 B</td>
+</tr>
+</tbody>
+</table>
+<p>Silence uses ID 0. Excluding that silence, the average audible core lasts <strong>0.466011 seconds</strong> in Spanish and <strong>0.422739 seconds</strong> in English. Phrase duration cannot be obtained by multiplying a unit count by an average: the selected fragments, trigger times and margins all matter.</p>
+<p>Each unit stores eight zero bytes before and eight after its core. A 4,990-sample unit occupies 5,006 bytes in the bank. Headers can start a few bytes before the core and adjust silence duration without storing another waveform. These are small playback variations over one copy of the sound.</p>
+<p>In the public repository, <code>assets/speech/es/</code> and <code>assets/speech/en/</code> contain <code>catalog.json</code> and <code>units.pcm.gz</code>. Gzip reduces source transport size; the build expands this PCM into the game files. <strong>There is no speech decompression during play.</strong> Prepared assets make a build possible without installing a voice model or connecting a synthesis service.</p>
+<h2 id="8-text-keys-and-the-unit-index">8. Text keys and the unit index</h2>
+<p>The engine's output passes a string to the resident player. It computes a key from normalized text: CRC-CCITT and normalized length. The key finds a score; it is not audio and does not contain one character per sample. Several catalogue entries can share a key.</p>
+<p>A lookup entry occupies seven bytes: a 16-bit CRC, a 16-bit length, a one-byte logical bank and a 16-bit score address. The unit index adds eight bytes per unit: a 32-bit PCM offset, a 16-bit core sample count and a reserved 16-bit field. These multibyte fields use little-endian order.</p>
+<p>For Spanish, 350 seven-byte lookup entries and 1,644 eight-byte unit entries total 15,602 useful index bytes. For English, 341 and 1,341 entries total 13,115 bytes. Each index is padded to its 16,384-byte segment.</p>
+<p>Voice files are split at 1 MiB. For global offset <code>p</code>, the file number is <code>p // 1048576</code> and its internal position is <code>p % 1048576</code>. This keeps unit identity independent of the bank's division into files. The Spanish and English tables have the same format, but their keys, units and offsets are not interchangeable.</p>
+<p>Pronunciation corrections belong to the prepared samples. The adventure can display a Roman numeral or an unaccented word while playing its corresponding spoken reading. Replacing only a visible string does not automatically create narration for its translation: text, key, score and bank must remain matched.</p>
+<h2 id="9-scores-six-byte-events">9. Scores: six-byte events</h2>
+<p><img alt="From a text key to playback" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQ1MCIgcm9sZT0iaW1nIj48dGl0bGU+MDUgwrcgRnJvbSB0ZXh0IHRvIHBsYXliYWNrPC90aXRsZT48ZGVmcz48bWFya2VyIGlkPSJhcnJvdyIgbWFya2VyV2lkdGg9IjkiIG1hcmtlckhlaWdodD0iOSIgcmVmWD0iOCIgcmVmWT0iNCIgb3JpZW50PSJhdXRvIj48cGF0aCBkPSJNMCwwIEw4LDQgTDAsOCIgZmlsbD0iIzQxNjA3NSIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmOGZiIi8+PHN0eWxlPnRleHR7Zm9udC1mYW1pbHk6RGVqYVZ1IFNhbnMsc2Fucy1zZXJpZjtmaWxsOiMxOTM1NGF9LnRpdGxle2ZvbnQtc2l6ZToyMXB4O2ZvbnQtd2VpZ2h0OmJvbGR9LnRleHR7Zm9udC1zaXplOjE2cHh9PC9zdHlsZT48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjI1IiB5PSIzNCI+MDUgwrcgRnJvbSB0ZXh0IHRvIHBsYXliYWNrPC90ZXh0PjxyZWN0IHg9IjI1IiB5PSI3MCIgd2lkdGg9IjI4NSIgaGVpZ2h0PSIxMTAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTc2ZTkxIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQwIiB5PSI5OSI+R2FtZSBzdHJpbmc8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQwIiB5PSIxMjciPk5vcm1hbGl6ZSB0ZXh0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0MCIgeT0iMTUyIj5DUkMtQ0NJVFQgKyBsZW5ndGg8L3RleHQ+PHJlY3QgeD0iMzU1IiB5PSI3MCIgd2lkdGg9IjI5MCIgaGVpZ2h0PSIxMTAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjM3MCIgeT0iOTkiPktleSDihpIgdGltaW5nIHNjb3JlPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIzNzAiIHk9IjEyNyI+U2l4LWJ5dGUgZXZlbnRzPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIzNzAiIHk9IjE1MiI+RGVsdGEsIHVuaXQgYW5kIG1hcmdpbjwvdGV4dD48cmVjdCB4PSI2OTAiIHk9IjcwIiB3aWR0aD0iMjg1IiBoZWlnaHQ9IjExMCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzNDg1NmQiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNzA1IiB5PSI5OSI+UHJlcGFyZSBwaHJhc2U8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjcwNSIgeT0iMTI3Ij5Mb2NhdGUgZXZlcnkgdW5pdDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNzA1IiB5PSIxNTIiPkxvYWQgb25seSBtaXNzaW5nIHNhbXBsZXM8L3RleHQ+PHJlY3QgeD0iMTYwIiB5PSIyOTAiIHdpZHRoPSI2ODAiIGhlaWdodD0iMTEwIiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzg0NWI5ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSIxNzUiIHk9IjMxOSI+T1BMNDogc2FtcGxlIGNhY2hlIGFuZCBsb2NhbCBoZWFkZXJzPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSIxNzUiIHk9IjM0NyI+T25lIGNvcHkgb2YgZWFjaCB1bml0OyBoZWFkZXJzIHBlciBldmVudDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iMTc1IiB5PSIzNzIiPlNjaGVkdWxlZCB0cmlnZ2VycyBvbiB0d28gYWx0ZXJuYXRpbmcgY2hhbm5lbHM8L3RleHQ+PHBhdGggZD0iTTMxMCwxMjUgTDM1NSwxMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjxwYXRoIGQ9Ik02NDUsMTI1IEw2OTAsMTI1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0MTYwNzUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz48cGF0aCBkPSJNODM1LDE4MCBMNjgwLDI5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PC9zdmc+" /></p>
+<table>
+<thead>
+<tr>
+<th>Offset within event</th>
+<th>Field</th>
+<th style="text-align: right;">Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Delta from the preceding event</td>
+<td style="text-align: right;">2 B</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Unit ID; FFFFh terminates</td>
+<td style="text-align: right;">2 B</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Margin adjustment</td>
+<td style="text-align: right;">1 B</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Reserved</td>
+<td style="text-align: right;">1 B</td>
+</tr>
+</tbody>
+</table>
+<p>The score is copied to a workspace of fewer than 256 bytes. Deltas are relative: an event's time is found by summing previous values. A unit can be triggered before another has ended; two alternating PCM channels preserve these transitions. A list of words played strictly one after another does not describe this schedule.</p>
+<p>This example shows the first events of a description from the Spanish catalogue. Times are the accumulated deltas multiplied by the timer period; the first unit is silence.</p>
+<table>
+<thead>
+<tr>
+<th>Six bytes</th>
+<th>Δ ticks</th>
+<th>Unit</th>
+<th>Margin</th>
+<th>Accumulated</th>
+<th>Seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00 00 00 00 00 00</code></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td><code>e6 00 01 00 07 00</code></td>
+<td>230</td>
+<td>1</td>
+<td>7</td>
+<td>230</td>
+<td>0.222959</td>
+</tr>
+<tr>
+<td><code>84 02 02 00 02 00</code></td>
+<td>644</td>
+<td>2</td>
+<td>2</td>
+<td>874</td>
+<td>0.847245</td>
+</tr>
+<tr>
+<td><code>6f 02 03 00 01 00</code></td>
+<td>623</td>
+<td>3</td>
+<td>1</td>
+<td>1497</td>
+<td>1.451173</td>
+</tr>
+<tr>
+<td><code>6e 02 04 00 07 00</code></td>
+<td>622</td>
+<td>4</td>
+<td>7</td>
+<td>2119</td>
+<td>2.054133</td>
+</tr>
+<tr>
+<td><code>cc 00 05 00 04 00</code></td>
+<td>204</td>
+<td>5</td>
+<td>4</td>
+<td>2323</td>
+<td>2.251888</td>
+</tr>
+</tbody>
+</table>
+<p>The nominal period is <code>72 × 38 × 12 / 33868800</code>, approximately 0.000969388 seconds. A delta of 230 represents about 0.223 seconds. The final event stops execution rather than identifying another sample. The margin parameter changes the temporary header for that occurrence, not the original shared PCM.</p>
+<h2 id="10-caching-in-opl4-ram">10. Caching in OPL4 RAM</h2>
+<p><img alt="Headers, samples and generation directory" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQwMCIgcm9sZT0iaW1nIj48dGl0bGU+MDYgwrcgTGF5b3V0IG9mIHRoZSAyIE1pQiBPUEw0IFJBTTwvdGl0bGU+PGRlZnM+PG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSI5IiBtYXJrZXJIZWlnaHQ9IjkiIHJlZlg9IjgiIHJlZlk9IjQiIG9yaWVudD0iYXV0byI+PHBhdGggZD0iTTAsMCBMOCw0IEwwLDgiIGZpbGw9IiM0MTYwNzUiLz48L21hcmtlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y1ZjhmYiIvPjxzdHlsZT50ZXh0e2ZvbnQtZmFtaWx5OkRlamFWdSBTYW5zLHNhbnMtc2VyaWY7ZmlsbDojMTkzNTRhfS50aXRsZXtmb250LXNpemU6MjFweDtmb250LXdlaWdodDpib2xkfS50ZXh0e2ZvbnQtc2l6ZToxNnB4fTwvc3R5bGU+PHRleHQgY2xhc3M9InRpdGxlIiB4PSIyNSIgeT0iMzQiPjA2IMK3IExheW91dCBvZiB0aGUgMiBNaUIgT1BMNCBSQU08L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjY1IiB3aWR0aD0iOTQwIiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzE3NmU5MSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI0NSIgeT0iOTQiPjIwMDAwMGjigJMyMDA3RkZoPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMTIyIj5QbGF5YmFjayBoZWFkZXIgcmVzZXJ2YXRpb248L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjE2MCIgd2lkdGg9Ijk0MCIgaGVpZ2h0PSIxMDAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSIxODkiPjIwMDgwMGjigJMzRkRGRkZoPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMjE3Ij5QQ00gc2FtcGxlIHBvb2w6IGVpZ2h0IHplcm8gYnl0ZXMgKyBjb3JlICsgZWlnaHQgemVybyBieXRlczwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjI0MiI+UmV1c2UgYnkgSUQgYW5kIGdlbmVyYXRpb248L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjI3NSIgd2lkdGg9Ijk0MCIgaGVpZ2h0PSI4NSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzNDg1NmQiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDUiIHk9IjMwNCI+M0ZFMDAwaOKAkzNGRkZGRmg8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQ1IiB5PSIzMzIiPkRpcmVjdG9yeTogY29yZSBhZGRyZXNzICgzIEIpICsgZ2VuZXJhdGlvbiAoMSBCKTwvdGV4dD48L3N2Zz4=" /></p>
+<p>Wave RAM is addressed in OPL4 range 200000h–3FFFFFh. Its beginning reserves space for headers; the sample pool starts at 200800h. The first unit's core begins eight bytes after its allocation starts. The cache directory starts at 3FE000h, within the last 8 KiB.</p>
+<p>Each directory entry occupies four bytes: a three-byte core address and a one-byte generation. Matching an ID and generation permits existing samples to be reused. Recycling the pool changes the generation; addresses from an older generation become invalid even though their bytes have not been erased. The directory is cleared when the counter wraps.</p>
+<p>The complete phrase is prepared before the first key-on. Its units are located, missing ones are loaded, and twelve-byte local headers are constructed for each occurrence. The player recycles the pool before preparing a phrase when its threshold requires it; the builder limits a phrase's total load to prevent units from being evicted halfway through preparation.</p>
+<p>This cache does not make the whole bank permanently resident. Spanish PCM exceeds six million bytes and English PCM four million; the chip has two MiB of RAM. A repeated fragment can avoid another read while still present. After recycling, it must be loaded again.</p>
+<h2 id="11-mapper-cache-latency-and-playback-clock">11. Mapper cache, latency and playback clock</h2>
+<p>The mapper cache keeps read blocks from voice files. It is a separate layer from the OPL4 cache: it can hold a unit's bytes even though they still need to be transferred to the chip. An OPL4 hit avoids both operations; a mapper-only hit avoids physical storage access but still requires the OPL4 transfer.</p>
+<p>Preparation explains the delay that can occur between displaying a phrase and hearing it. It depends on how many blocks are new, their sizes, the storage medium and both caches' state. Reducing score bytes does not automatically reduce the missing PCM load. A long phrase is not loaded as one monolithic WAV: its units are collected and those already present are reused.</p>
+<p>During playback, the OPL4 timer uses FM register 04h = 01h. FT1 remains unmasked because the program polls that same flag; the CPU keeps DI while owning the clock. Before EI, the timers are stopped and masked with 60h and their flags cleared with 80h. A bounded wait returns control if the timer does not advance.</p>
+<p>ESC is read directly from the matrix during narration. It does not depend on a BIOS interrupt left disabled. On completion or cancellation, the used channels are switched off and the game context restored.</p>
+<h2 id="12-msx1-pictures">12. MSX1 pictures</h2>
+<p>The graphics index contains two tables of 256 32-bit offsets, one per part. FFFFFFFFh means there is no defined composition. Equal compositions share a block: 34 compositions correspond to 33 distinct blocks, including the shared black image.</p>
+<p>A room image occupies 8 KiB of patterns and colours. The first 4 KiB go to VRAM 0000h–0FFFh and the second to 2000h–2FFFh. They must not be written as one contiguous 8 KiB area: data between those regions does not belong to the drawing. Font, text and other table regions are preserved.</p>
+<p>The engine requests the drawing before printing and narrating the description. Darkness branches still decide whether a picture should be shown. An independent clear remains a clear; turning every clear into a room reload would change that behaviour.</p>
+<h2 id="13-msx2-pictures-and-font">13. MSX2 pictures and font</h2>
+<p><img alt="Alternating pages and hidden character atlas" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQ0MCIgcm9sZT0iaW1nIj48dGl0bGU+MDcgwrcgU0NSRUVOIDU6IHR3byBwYWdlcyBhbmQgYSBoaWRkZW4gZm9udDwvdGl0bGU+PGRlZnM+PG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSI5IiBtYXJrZXJIZWlnaHQ9IjkiIHJlZlg9IjgiIHJlZlk9IjQiIG9yaWVudD0iYXV0byI+PHBhdGggZD0iTTAsMCBMOCw0IEwwLDgiIGZpbGw9IiM0MTYwNzUiLz48L21hcmtlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y1ZjhmYiIvPjxzdHlsZT50ZXh0e2ZvbnQtZmFtaWx5OkRlamFWdSBTYW5zLHNhbnMtc2VyaWY7ZmlsbDojMTkzNTRhfS50aXRsZXtmb250LXNpemU6MjFweDtmb250LXdlaWdodDpib2xkfS50ZXh0e2ZvbnQtc2l6ZToxNnB4fTwvc3R5bGU+PHRleHQgY2xhc3M9InRpdGxlIiB4PSIyNSIgeT0iMzQiPjA3IMK3IFNDUkVFTiA1OiB0d28gcGFnZXMgYW5kIGEgaGlkZGVuIGZvbnQ8L3RleHQ+PHJlY3QgeD0iMzAiIHk9IjcwIiB3aWR0aD0iNDQ1IiBoZWlnaHQ9IjI2NSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMxNzZlOTEiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNDUiIHk9Ijk5Ij5QYWdlIDAgwrcgMDAwMGg8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQ1IiB5PSIxMjciPkxpbmVzIDDigJMxMjc6IDI1NsOXMTI4IHBpY3R1cmU8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjQ1IiB5PSIxNTIiPkxpbmVzIDEyOOKAkzE5MTogZWlnaHQgdGV4dCByb3dzPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMTc3Ij5MaW5lcyAxOTLigJMyMTE6IGJsYWNrIG1hcmdpbjwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjIwMiI+PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMjI3Ij5ITU1DIOKGkiBpbWFnZTsgSE1NTSDihpIgdGV4dDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNDUiIHk9IjI1MiI+SE1NViDihpIgY2xlYXI8L3RleHQ+PHJlY3QgeD0iNTI1IiB5PSI3MCIgd2lkdGg9IjQ0NSIgaGVpZ2h0PSIyNjUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjU0MCIgeT0iOTkiPlBhZ2UgMSDCtyA4MDAwaDwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNTQwIiB5PSIxMjciPkxpbmVzIDDigJMxMjc6IDI1NsOXMTI4IHBpY3R1cmU8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjU0MCIgeT0iMTUyIj5MaW5lcyAxMjjigJMxOTE6IGVpZ2h0IHRleHQgcm93czwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNTQwIiB5PSIxNzciPkxpbmVzIDE5MuKAkzIxMTogYmxhY2sgbWFyZ2luPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NDAiIHk9IjIwMiI+PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI1NDAiIHk9IjIyNyI+SE1NQyDihpIgaW1hZ2U7IEhNTU0g4oaSIHRleHQ8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjU0MCIgeT0iMjUyIj5ITU1WIOKGkiBjbGVhcjwvdGV4dD48cmVjdCB4PSIxNTUiIHk9IjM1NSIgd2lkdGg9IjY5MCIgaGVpZ2h0PSI2NSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM4NDViOWUiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iMTcwIiB5PSIzODQiPkYwMDBo4oCTRkJGRmg8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjE3MCIgeT0iNDEyIj5DaGFyYWN0ZXIgYXRsYXM6IDI1NsOXMjQsIDjDlzggY2VsbHM8L3RleHQ+PC9zdmc+" /></p>
+<p>The MSX2 option represents rooms in SCREEN 5, at 256×128 pixels with two colour indexes per byte. Each drawing block occupies 16,384 bytes followed by 32 palette bytes. Index 0 is black and index 15 white; the other fourteen change with each image. Text therefore retains its colour when the landscape palette changes.</p>
+<p>The screen uses 212 lines. The picture occupies the first 128; eight character rows occupy lines 128–191, with a black margin below. The two pages start at 0000h and 8000h. The original font atlas occupies F000h–FBFFh, 256×24 pixels, outside both visible areas. This layout fits the first 64 KiB of VRAM.</p>
+<p>Each character is copied from an atlas cell using an 8×8 HMMM. Scrolling uses a 256×56 copy and a 256×8 HMMV clears the last row. The CPU programs coordinates and dimensions rather than tracing each character's pixels again. Word wrapping and uppercase handling retain the adventure's behaviour.</p>
+<p>The next picture is prepared on the hidden page using HMMC. DOS supplies packed bytes and the CPU transfers them to the VDP data register when TR permits it. The command engine generates destination addresses. HMMM preserves the text, and page and palette are switched during VBlank; only then do the description and speech begin.</p>
+<p>HMMC consumes its first byte from CLR when it starts. The driver prepares coordinates, supplies the first real byte and activates the command; the rest follows while waiting for TR. Starting with an empty CLR and then transmitting every byte would shift the image. If reading fails, the transfer is aborted so that the program does not await a command needing data that will never arrive.</p>
+<p><code>SC5.DAT</code> contains the 3,072-byte atlas, opening and logo at 24,576+32 bytes each, and 33 images at 16,384+32 bytes each: 594,016 bytes altogether. <code>SC5.IDX</code> occupies 16 KiB; its first two tables index rooms and the remaining space holds the driver's copy. The recoloured opening preserves the original drawing's silhouettes and pixel pattern.</p>
+<h2 id="14-introduction-password-and-linked-parts">14. Introduction, password and linked parts</h2>
+<p><img alt="Startup sequence and key wait" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQ5MCIgcm9sZT0iaW1nIj48dGl0bGU+MDggwrcgU3RhcnR1cCBhbmQgcGFydCB0cmFuc2l0aW9uPC90aXRsZT48ZGVmcz48bWFya2VyIGlkPSJhcnJvdyIgbWFya2VyV2lkdGg9IjkiIG1hcmtlckhlaWdodD0iOSIgcmVmWD0iOCIgcmVmWT0iNCIgb3JpZW50PSJhdXRvIj48cGF0aCBkPSJNMCwwIEw4LDQgTDAsOCIgZmlsbD0iIzQxNjA3NSIvPjwvbWFya2VyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmOGZiIi8+PHN0eWxlPnRleHR7Zm9udC1mYW1pbHk6RGVqYVZ1IFNhbnMsc2Fucy1zZXJpZjtmaWxsOiMxOTM1NGF9LnRpdGxle2ZvbnQtc2l6ZToyMXB4O2ZvbnQtd2VpZ2h0OmJvbGR9LnRleHR7Zm9udC1zaXplOjE2cHh9PC9zdHlsZT48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjI1IiB5PSIzNCI+MDggwrcgU3RhcnR1cCBhbmQgcGFydCB0cmFuc2l0aW9uPC90ZXh0PjxyZWN0IHg9IjMwIiB5PSI2NSIgd2lkdGg9IjI3MCIgaGVpZ2h0PSIxMTUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMTc2ZTkxIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjQ1IiB5PSI5NCI+TWVudSBhbmQgcmVwb3J0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMTIyIj5MYW5ndWFnZSBhbmQgTVNYMS9NU1gyPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI0NSIgeT0iMTQ3Ij5FTlRFUiBjb25maXJtcyBtZW1vcnk8L3RleHQ+PHJlY3QgeD0iMzY1IiB5PSI2NSIgd2lkdGg9IjI3MCIgaGVpZ2h0PSIxMTUiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZGY4ZTI2IiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCBjbGFzcz0idGl0bGUiIHg9IjM4MCIgeT0iOTQiPkRpSGFsdCBwcmVzZW50YXRpb248L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjM4MCIgeT0iMTIyIj5Mb2dvIGFuZCBPUEw0IGZhbmZhcmU8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjM4MCIgeT0iMTQ3Ij5UaGVuOiBwYXNzd29yZDwvdGV4dD48cmVjdCB4PSI3MDAiIHk9IjY1IiB3aWR0aD0iMjcwIiBoZWlnaHQ9IjExNSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzNDg1NmQiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNzE1IiB5PSI5NCI+U2VsZWN0IHBhcnQ8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjcxNSIgeT0iMTIyIj5FbXB0eSBpbnB1dCDihpIgQTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNzE1IiB5PSIxNDciPlZhbGlkIHBhc3N3b3JkIOKGkiBCPC90ZXh0PjxyZWN0IHg9IjcwIiB5PSIyOTUiIHdpZHRoPSIzOTAiIGhlaWdodD0iMTM1IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzg0NWI5ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgY2xhc3M9InRpdGxlIiB4PSI4NSIgeT0iMzI0Ij5PcGVuaW5nIEEg4oaSIG5ldyBrZXk8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9Ijg1IiB5PSIzNTIiPlBhcnQgb25lIHN0YXJ0czwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iODUiIHk9IjM3NyI+SXRzIGVuZGluZyBsZWFkcyB0byBCPC90ZXh0Pjx0ZXh0IGNsYXNzPSJ0ZXh0IiB4PSI4NSIgeT0iNDAyIj5XaXRob3V0IGFza2luZyBmb3IgdGhlIHBhc3N3b3JkPC90ZXh0PjxyZWN0IHg9IjU2MCIgeT0iMjk1IiB3aWR0aD0iMzkwIiBoZWlnaHQ9IjEzNSIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM2NTc5OGIiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IGNsYXNzPSJ0aXRsZSIgeD0iNTc1IiB5PSIzMjQiPk9wZW5pbmcgQiDihpIgbmV3IGtleTwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNTc1IiB5PSIzNTIiPlBhcnQgdHdvIHN0YXJ0czwvdGV4dD48dGV4dCBjbGFzcz0idGV4dCIgeD0iNTc1IiB5PSIzNzciPkJvdGggb3BlbmluZ3Mgd2FpdCBpbmRlZmluaXRlbHk8L3RleHQ+PHRleHQgY2xhc3M9InRleHQiIHg9IjU3NSIgeT0iNDAyIj5UaGUgcHJlY2VkaW5nIEVOVEVSIGlzIGRpc2NhcmRlZDwvdGV4dD48cGF0aCBkPSJNMzAwLDEyNSBMMzY1LDEyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PHBhdGggZD0iTTYzNSwxMjUgTDcwMCwxMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjxwYXRoIGQ9Ik03NjAsMTgwIEwyNzAsMjk1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0MTYwNzUiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz48cGF0aCBkPSJNODgwLDE4MCBMNzYwLDI5NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDE2MDc1IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+PHBhdGggZD0iTTQ2MCwzNjAgTDU2MCwzNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQxNjA3NSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPjwvc3ZnPg==" /></p>
+<p>After the menu, the memory report waits for ENTER. The DiHalt presentation and an approximately ten-second fanfare follow. That presentation uses a 500-frame event schedule at a logical 50 Hz, adapted to video frequency. Narration restores its own OPL4 configuration afterwards.</p>
+<p>The password is requested before loading a part. Empty input and ENTER select the first; the classic password selects the second. Spanish and English variants are accepted, ignoring case and spaces; Backspace permits editing. An incorrect password returns to the editor.</p>
+<p>The opening remains indefinitely until a new key. Previous keys must first be released and the BIOS buffer emptied; CHGET then waits with interrupts enabled. This prevents the preceding ENTER from skipping the picture. Return clears the queue and restores DI before continuing the bootstrap.</p>
+<p>Completing part one retains its message and loads part two without requesting the password again. Part two's opening also waits for a key. This joins the two adventures, rather than implementing intermediate saved positions: save and load commands retain their cassette function.</p>
+<p>The editor limits each command to 31 characters, including spaces; the remaining cell of the 32-column row holds the cursor. The shared routine in <code>common/command_input.asm</code> compares the write pointer (738Ch) against the buffer base (738Eh) before returning a printable character to the engine. Once the difference reaches 31, further letters and spaces are discarded; Backspace and ENTER remain available. The limit therefore does not depend on the visible column being preserved. Control characters other than deletion and submission are ignored.</p>
+<p>The MSX2 renderer also honours the column limit maintained by the engine at 7060h: normally 32, temporarily 33 when drawing the cursor. This lets the cursor occupy the last cell without scrolling the text or resetting the editor column. The buffer check applies to both languages and both graphics options.</p>
+<h2 id="15-public-documents-and-resources">15. Public documents and resources</h2>
+<p>The repository contains the design in <code>docs/DESIGN.md</code>, build requirements and commands in <code>docs/BUILDING.md</code>, loader and player sources in <code>src/</code>, and prepared assets in <code>assets/</code>. Speech catalogues and their compressed PCM match by language; the English translation is in <code>assets/english/translation.json</code>. English voice attribution is provided in <code>VOICE-NOTICE.txt</code>.</p>
+<p>This reference has two equivalent source texts and produces <code>TECNICA-es.pdf/html</code> and <code>TECNICA-en.pdf/html</code>. Its figures and tables belong to the same documentation set. <code>MANUAL-ES.pdf</code> and <code>MANUAL-EN.pdf</code> are for players rather than engine instructions.</p>
+<p>Changing a voice requires keeping the core offset, length, hash, lookup key and score matched. Changing a picture requires retaining its dimensions, format and room associations. A language change must cover visible text, parser vocabulary and narration; translating the interface alone does not change game rules or produce new audio.</p>
+<p>Don Quijote was published by Dinamic in 1987. The MSX-DOS adaptation, OPL4 integration, graphics selection and documentation are DiHalt Studio's work. The original adventure, text and artwork retain their respective authorship and rights. This is an unofficial adaptation without affiliation with the original authors.</p></main></body></html>

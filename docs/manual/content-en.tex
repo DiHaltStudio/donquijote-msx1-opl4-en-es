@@ -1,14 +1,14 @@
 \selectlanguage{english}
 \renewcommand{\gameplayimage}{assets/first-room-en.png}
-\cover{Player's manual}{Pictures without the wait. An adventure with speech.}{MSX-DOS + OPL4}
+\cover{Player's manual}{Pictures without the wait. An adventure with speech.}{MSX-DOS + OPL4 / v2.0}
 
 \thispagestyle{empty}
 \begin{center}\vspace*{8mm}{\fontsize{29}{33}\selectfont\bfseries\color{accent} Return to La Mancha}\par\vspace{8mm}
-\includegraphics[width=0.85\linewidth]{assets/cover-original.png}
+\includegraphics[width=0.85\linewidth]{assets/cover-msx2.png}
 \end{center}
 \textbf{Don Quijote}, published by Dinamic in 1987, brings an adventure freely inspired by Cervantes to the computer. In this illustrated text adventure, Alonso Quijano pursues his ideal of chivalry along the roads, inns and villages of La Mancha.
 
-This MSX-DOS edition preserves the existing game's adventure, text and artwork. Its additions are \textbf{fast picture loading} and \textbf{OPL4 narration} for descriptions and responses. Both parts are linked in a single session.
+This MSX-DOS edition preserves the existing adventure and text. Choose the original artwork in the MSX1 version, or improved illustrations and a recoloured opening in the MSX2 version. Its additions are \textbf{fast picture loading} and \textbf{OPL4 narration} for descriptions and responses. Both parts are linked in a single session.
 
 First you must prepare to become a knight. Further adventures then await on your journey towards Dulcinea. Look around, read carefully, and let the places and their inhabitants guide you.
 
@@ -23,17 +23,17 @@ First you must prepare to become a knight. Further adventures then await on your
 Before the introduction, the program shows compatible mapper RAM and detected OPL4 sample RAM. If the requirements are met, press \key{ENTER} to continue. If memory is insufficient or no compatible interface is found, it explains the reason and returns to DOS.
 
 \sectionpage{Choose English or Spanish}
-Choose the language when running the program. \cmd{QUIXOTE.COM} is the English edition; \cmd{QUIJOTE.COM} is Spanish. Both contain the two parts and support DOS1 and DOS2/Nextor.
+Choose the language with its launcher: \cmd{QUIXOTE.BAT} opens the English menu and \cmd{QUIJOTE.BAT} the Spanish menu. Then select MSX1 or MSX2. All versions contain both parts and support DOS1 and DOS2/Nextor.
 
 \begin{tabularx}{\linewidth}{@{}lXX@{}}\toprule
  & English & Español\\\midrule
-Distribution folder & \cmd{release/SD/} & \cmd{release/SD/}\\
+Distribution folder & \cmd{SD/} & \cmd{SD/}\\
 Launch command & \cmd{QUIXOTE} & \cmd{QUIJOTE}\\
-Game files & All; about 10.9 MiB & All; about 10.9 MiB\\
+Game files & All; one shared package & All; one shared package\\
 Narration & British English & Spanish from Spain\\\bottomrule
 \end{tabularx}
 
-Copy every file from the single \cmd{release/SD/} package into one folder (the root under DOS1). Both languages are included, sharing pictures and presentation files. Run \cmd{QUIXOTE} or \cmd{QUIJOTE} to choose the language. Spanish data files are \cmd{GAME.DAT}, \cmd{INDEX.DAT}, \cmd{SCORES.DAT} and \cmd{VOICE0.PCM} through \cmd{VOICE5.PCM}.
+Copy all files from \cmd{SD/} into one folder (the drive root under DOS1). The package contains both languages and both versions, sharing the voices and introduction. Type \cmd{QUIXOTE} or \cmd{QUIJOTE} to open its menu.
 
 \begin{tabularx}{\linewidth}{@{}XX@{}}\toprule
 English commands & Spanish commands\\\midrule
@@ -52,15 +52,38 @@ In English, \cmd{N/S/E/W/U/D}, \cmd{L} and \cmd{I} also work. Use full command a
 
 The password announced at the end of part one is translated with the game. The start-up screen accepts either version, ignoring case and spaces. Leaving it empty and pressing \key{ENTER} always starts part one.
 
+
+\sectionpage{Choose MSX1 or MSX2}
+After typing \cmd{QUIXOTE} or \cmd{QUIJOTE}, the version menu appears. Type the number and press \key{ENTER}.
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}\toprule
+Option & What you get\\\midrule
+\cmd{1} --- MSX1 & Original pictures. Runs on MSX1 or later.\\
+\cmd{2} --- MSX2 & Improved illustrations and a recoloured opening that preserves its shapes. Requires MSX2 or later.\\
+\cmd{0} & Exit to DOS.\\\bottomrule
+\end{tabularx}
+
+Both options keep the same adventure, commands, speech and link between the two parts. On MSX2 or later you can choose either. If you select option 2 on MSX1, the menu explains the requirement and lets you choose again.
+
+\begin{center}
+\includegraphics[width=.47\linewidth]{assets/first-room-en.png}\hfill
+\includegraphics[width=.47\linewidth]{assets/first-room-msx2-en.png}\par
+{\small The same location on MSX1 (left) and MSX2 (right).}
+\end{center}
+
+\noteBox{Upgrading an older installation}{Remove old \cmd{QUIJOTE.COM} and \cmd{QUIXOTE.COM} files before copying the new package. DOS searches for COM files before BAT files, so old executables would bypass the menu. Keep the four new game programs: \cmd{Q1ES.COM}, \cmd{Q1EN.COM}, \cmd{Q2ES.COM} and \cmd{Q2EN.COM}.}
+
+If using a file manager, return to the DOS prompt and type \cmd{QUIXOTE} or \cmd{QUIJOTE}, or explicitly run the BAT file for your language.
+
 \sectionpage{What you need}
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}p{32mm}X@{}}\toprule
 Equipment & Requirement\\\midrule
-Computer & MSX1 or later, with a keyboard.\\
+Computer & MSX1 or later for option 1; MSX2 or later for option 2. An MSX keyboard.\\
 Storage & MegaFlashROM SCC+ SD or a compatible MSX-DOS equivalent. Requires \textbf{512 KiB of mapper RAM}.\\
 Sound & Compatible OPL4 with \textbf{2 MiB of sample RAM}, such as a Wozblaster fitted with that capacity.\\
-System & MSX-DOS 1 or MSX-DOS 2 / Nextor. The same \cmd{QUIXOTE.COM} supports both.\\
+System & MSX-DOS 1 or MSX-DOS 2 / Nextor. The same menus and programs support both.\\
 Picture & A monitor or television connected to the MSX's usual video output.\\
-Files & All game files from \cmd{release/SD/}, kept together. Allow about \textbf{10.9 MiB} of free space.\\
+Files & All game files from \cmd{SD/}, kept together. Allow about \textbf{13 MiB} of free space.\\
 Controls & The MSX keyboard. You do not need a joystick to enter commands.\\\bottomrule
 \end{tabularx}
 
@@ -68,7 +91,7 @@ The MSX RAM expansion and the OPL4's memory serve different purposes. \textbf{Yo
 
 Switch off the computer before connecting or removing cartridges. If other devices leave too few free cartridge slots, use a slot expander suitable for your set-up.
 
-\noteBox{Keep your existing system installation}{To run the game from a folder under Nextor/DOS2, you only need the files in \cmd{SD/}. The files in \cmd{DOS1BOOT/} are optional and intended for booting DOS1.}
+\noteBox{Use your existing system}{Start MSX-DOS or Nextor as usual. The game runs from the files in \cmd{SD/}.}
 
 \sectionpage{Set up the computer and choose your system}
 \begin{enumerate}
@@ -84,16 +107,17 @@ Switch off the computer before connecting or removing cartridges. If other devic
 \textbf{Nextor/DOS2} is convenient if you want to keep the game in a folder. \textbf{DOS1} requires the files to be in the partition's root directory. The drive letter depends on your installation; the examples use \cmd{B:}.
 
 \sectionpage{Install and start under Nextor/DOS2}
-Copy \textbf{all files from \cmd{release/SD/}} into a folder on your card. For example, use \cmd{QUIXOTE} inside \cmd{JUEGOS}.
+Copy \textbf{all files from \cmd{SD/}} into a folder on your card. For example, use \cmd{QUIXOTE} inside \cmd{JUEGOS}.
 
 \begin{tabularx}{\linewidth}{@{}lX@{}}\toprule
 File & Purpose for the player\\\midrule
-\cmd{QUIXOTE.COM} & The program you run.\\
-\cmd{ENGAME.DAT} & Data for both parts of the game.\\
-\cmd{BRAND.DAT} & DiHalt Studio presentation.\\
-\cmd{ENINDEX.DAT}, \cmd{ENSCORE.DAT} & Files needed by the narration.\\
-\cmd{ENVOX0.PCM} through \cmd{ENVOX4.PCM} & The five speech files. Copy all five.\\
-\cmd{VRAM.DAT}, \cmd{VRAM.IDX} & Picture files.\\\bottomrule
+\cmd{QUIJOTE.BAT}, \cmd{QUIXOTE.BAT} & Spanish and English menus.\\
+\cmd{QMENU.COM} and the four \cmd{Q1/Q2*.COM} files & Selector and game programs. Copy them all.\\
+\cmd{GAME.DAT}, \cmd{ENGAME.DAT}, \cmd{Q2ES.DAT}, \cmd{Q2EN.DAT} & Both parts in each version and language.\\
+\cmd{BRAND.DAT} & DiHalt Studio introduction.\\
+\cmd{INDEX.DAT}, \cmd{SCORES.DAT} and their English equivalents & Narration resources.\\
+\cmd{VOICE0.PCM} through \cmd{VOICE5.PCM}; \cmd{ENVOX0.PCM} through \cmd{ENVOX4.PCM} & Both languages' speech, shared by MSX1 and MSX2.\\
+\cmd{VRAM.DAT}, \cmd{VRAM.IDX}, \cmd{SC5.DAT}, \cmd{SC5.IDX} & Pictures for MSX1 and MSX2.\\\bottomrule
 \end{tabularx}
 
 At the Nextor/DOS2 prompt:
@@ -105,33 +129,34 @@ QUIXOTE
 
 Change \cmd{B:} and the path to match your card. \textbf{Enter the game folder first}: the program looks for its data in the current directory. Keep all files together with their original names.
 
-\noteBox{What to copy and what to run}{Copy the contents of \cmd{SD/}; \cmd{QUIXOTE.COM} is the executable. You do not need to put \cmd{DOS1BOOT/} in the game folder for Nextor/DOS2.}
+\noteBox{What to copy and what to run}{Copy the contents of \cmd{SD/}; open \cmd{QUIXOTE.BAT} to choose a version. Run the menu from that folder, with all game files kept together.}
 
 You do not need to flash the adventure into the MegaFlashROM. It runs from the files on the SD card.
 
 \sectionpage{Install and start under DOS1}
-\textbf{DOS1 does not support subdirectories.} Copy the contents of \cmd{release/SD/} to the \textbf{root} of a DOS1-compatible partition. The reference image accompanying the project tools uses a 16 MiB FAT12 partition.
+\textbf{DOS1 does not support subdirectories.} Copy all files from \cmd{SD/} to the \textbf{root} of the drive used for playing. Keep their names and retain the programs, pictures and speech for both languages together.
 
-If you still need DOS1 boot files, \cmd{release/DOS1BOOT/} contains:
-\begin{itemize}
-\item \cmd{MSXDOS.SYS}
-\item \cmd{COMMAND.COM}
-\item \cmd{AUTOEXEC.BAT}
-\end{itemize}
-Copy these files to the root as well if you intend to boot that system. If your DOS1 installation already works, you can keep its existing boot files.
-
-On a MegaFlashROM with Nextor, holding \key{1} while booting selects DOS1 mode. Then select the drive containing the game and run it:
+Start your existing DOS1 installation. Select the drive containing the game and type the menu for your language:
 \begin{quote}\ttfamily
 B:\\
 QUIXOTE
 \end{quote}
+For Spanish, type \cmd{QUIJOTE}. The drive letter \cmd{B:} is an example; use the letter for your disk or card.
 
-The supplied \cmd{AUTOEXEC.BAT} contains the \cmd{QUIJOTE} command (Spanish); run \cmd{QUIXOTE} for English. If the computer boots from another drive, select the SD card's drive manually before running the game.
+\begin{tabularx}{\linewidth}{@{}lX@{}}\toprule
+Under DOS1 & What to do\\\midrule
+Location & All files directly in the drive root.\\
+Language & \cmd{QUIXOTE.BAT} for English or \cmd{QUIJOTE.BAT} for Spanish.\\
+Graphics version & Option \cmd{1} for MSX1 or \cmd{2} for MSX2, followed by \key{ENTER}.\\
+Data & Copy every file from \cmd{SD/}; do not mix files from different editions.\\\bottomrule
+\end{tabularx}
 
-\noteBox{One executable}{There is no separate program for each DOS. DOS1 and Nextor/DOS2 use the same \cmd{QUIXOTE.COM} and the same game files.}
+\noteBox{The same package for both systems}{DOS1 and Nextor/DOS2 use the same game files. Their location changes: the root for DOS1, the root or a folder for Nextor/DOS2. Language and graphics selection work the same way.}
+
+After choosing a program, confirm the memory report with \key{ENTER}. If a requirement is missing, read the message and return to DOS to review your configuration before starting the game again.
 
 \sectionpage{From start-up to your first command}
-The presentation begins with the DiHalt Studio logo and an OPL4 fanfare lasting about ten seconds. After it finishes, press \key{ENTER} with an empty input to start part one, or enter the password earned on completing it to start part two. Use \key{BS} to correct typing; an incorrect password lets you try again. The original loading picture and the chosen part follow.
+After choosing a version and pressing \key{ENTER} to confirm the memory report, the presentation begins with the DiHalt Studio logo and an OPL4 fanfare lasting about ten seconds. After it finishes, press \key{ENTER} with an empty input to start part one, or enter the password earned on completing it to start part two. Use \key{BS} to correct typing; an incorrect password lets you try again. The opening picture follows and stays on screen until you press a key to begin the chosen part.
 
 When you enter a location with an illustration, \textbf{the picture appears first}; the description and its narration follow. Wait for the phrase to finish, or press \key{ESC} to cancel it, before typing a command.
 
@@ -143,7 +168,7 @@ When you enter a location with an illustration, \textbf{the picture appears firs
 \item \textbf{Input}: the \cmd{>} symbol shows where to type your next command.
 \end{enumerate}
 
-When you complete part one, read the message and press a key when asked. Part two loads in the same session, \textbf{without entering the password again}. Write it down to start part two in another session; it does not restore a position within a part.
+When you complete part one, read the message and press a key when asked. Part two loads in the same session, \textbf{without entering the password again}. Its opening picture also waits for a key before continuing. Write it down to start part two in another session; it does not restore a position within a part.
 
 \sectionpage{Controls and commands}
 \begin{tabularx}{\linewidth}{@{}p{43mm}X@{}}\toprule
@@ -158,6 +183,8 @@ Move & \cmd{NORTH}, \cmd{SOUTH}, \cmd{EAST}, \cmd{WEST}, \cmd{UP}, \cmd{DOWN}, w
 Restart the adventure & \cmd{QUIT}. Use it when you want to start again.\\\bottomrule
 \end{tabularx}
 
+Each command accepts \textbf{31 characters, including spaces}: a single line. Once it is full, further characters are ignored. You can still use \key{BS / Backspace} to edit it or \key{RETURN / ENTER} to submit it.
+
 The simplest instruction uses \textbf{verb + noun}. Use the game's English vocabulary:
 \begin{quote}
 \cmd{READ BOOK}\par
@@ -169,7 +196,6 @@ Type commands without accents, as in these examples. These illustrate vocabulary
 
 \noteBox{If you type while narration is playing}{Normal command entry is handled after the narration. Wait or cancel the phrase with \key{ESC}; then type your instruction and press \key{RETURN / ENTER}.}
 
-\textbf{Emulator only:} \key{F9} speeds up emulation and \key{F10} opens the openMSX console when using the project's launchers. These are not game controls on a real MSX.
 
 \sectionpage{Make progress without losing your way}
 Read the whole description before acting. It often mentions the exit you need or hints at something worth examining. Use \cmd{LOOK} when you want to read or hear the location again.
@@ -195,7 +221,7 @@ The picture does not replace the text. Some locations have no illustration; keep
 \sectionpage{If something goes wrong}
 \begin{tabularx}{\linewidth}{@{}p{47mm}X@{}}\toprule
 Symptom & What to check\\\midrule
-DOS cannot find \cmd{QUIXOTE} & Select the correct drive. Under DOS2/Nextor, use \cmd{CD} to enter the folder containing \cmd{QUIXOTE.COM}.\\
+DOS cannot find \cmd{QUIXOTE} & Select the correct drive. Under DOS2/Nextor, use \cmd{CD} to enter the folder containing \cmd{QUIXOTE.BAT}.\\
 Error while loading files & Check all files and their names. Under DOS1 they must be in the root; under DOS2, together in the current directory.\\
 The game appears but is silent & Check the OPL4 connection, volume and audio output, and confirm that it has 2 MiB of sample RAM.\\
 Letters do not appear during speech & Wait for the phrase to finish or press \key{ESC}, then type your command.\\
@@ -217,7 +243,7 @@ Loading picture: \textbf{Javier Cubedo}.\par
 Artistic design: \textbf{Ángel Luis González}.
 
 \textbf{MSX-DOS + OPL4 edition}\par
-\textbf{DiHalt Studio, 2026}: SD loading adaptation, linked parts, fast picture loading, OPL4 narration and this manual. The original adventure is preserved; the English edition translates its text and commands.
+\textbf{DiHalt Studio, 2026}: SD loading adaptation, linked parts, fast picture loading, the MSX2 graphics version, OPL4 narration and this manual. The original adventure is preserved; the English edition translates its text and commands.
 
 This project is an unofficial adaptation and homage. Don Quijote, its original artwork, text and other original elements remain the property of their respective rights holders. No affiliation with Dinamic or the original authors is claimed. This edition grants no rights to the original works.
 
@@ -230,4 +256,4 @@ The \cmd{SOURCES.md} file beside this manual's sources records the provenance of
 
 \vfill
 \textcolor{accent}{\textbf{Preserve the adventure. Share your observations.}}\par
-If you would like to improve this edition, consult the source and documentation accompanying the project and contribute your changes to its maintainers.
+Source code and documentation are available in the \href{https://github.com/DiHaltStudio/donquijote-msx1-opl4-en-es}{DiHalt Studio GitHub repository}. Please improve the game if you feel so!

@@ -1,5 +1,6 @@
 ; The established DiHalt OPL4 fanfare. Transient data occupies DOS game
 ; segments4..6 before the original load images overwrite those segments.
+; ROM keeps the exact same data in appended ASCII16 banks.
 branding_start:
     di
     ld a,(v_enabled)
@@ -23,8 +24,13 @@ branding_start:
     ld h,040h
     call 0024h
     di
+    if BRAND_DOS
     ld a,4
     ld hl,04000h
+    else
+    ld a,BRAND_BANK
+    ld hl,BRAND_ADDRESS
+    endif
     ld (branding_bank),a
     ld (branding_pointer),hl
     call branding_map
@@ -165,8 +171,10 @@ branding_done:
     jr z,.restore
     call v_clear_cache
 .restore:
+    if BRAND_DOS
     ld a,5
     call set_page1
+    endif
     ld a,(bios_slot)
     ld h,040h
     call 0024h
@@ -210,7 +218,12 @@ branding_write:
     ret
 
 branding_map:
+    if BRAND_DOS
     jp set_page1
+    else
+    ld (06000h),a
+    ret
+    endif
 branding_get:
     push hl
     ld hl,(branding_pointer)

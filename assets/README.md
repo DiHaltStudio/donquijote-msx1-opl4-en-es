@@ -11,3 +11,7 @@
 
 See `docs/DESIGN.md` for sample and score layouts and `VOICE-NOTICE.txt` for
 attribution. Original game text and artwork retain their original rights.
+
+- `msx2`: enhanced indexed room pictures, recoloured opening, presentation
+  image, exact VDP palettes and room mapping. The font is extracted at build
+  time from the separately supplied original tape.

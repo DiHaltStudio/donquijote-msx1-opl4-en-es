@@ -1,20 +1,21 @@
-# Don Quijote / Don Quixote — MSX-DOS + OPL4 v1.01
+# Don Quijote / Don Quixote 2.0 — MSX1 / MSX2 + OPL4
 
-This update adds a memory requirements report before the game starts, in both Spanish and English.
+A single bilingual package with selectable graphics, spoken descriptions and responses, fast picture loading and both parts joined together.
 
-- Detects compatible mapper RAM and OPL4 sample RAM, including mirrored memory banks.
-- Shows RAM reserved for the game and the required minimums.
-- Explains missing or insufficient memory and returns to DOS.
-- Uses a bounded OPL4 status wait for absent or unresponsive hardware.
-- Separates file-loading errors from memory errors and names the requested data file.
-- Updates both illustrated player manuals.
+- Choose original MSX1 graphics or enhanced MSX2 illustrations and a recoloured opening.
+- Spanish text and narration, or English text, commands and Northern British narration.
+- One SD directory shares voice banks and common resources across all four executables.
+- Each part's opening waits for a new key, including direct entry to part two with its classic password.
+- Commands are limited to one line of 31 characters; Backspace and ENTER remain available when the line is full.
+- Version 2.0 appears in both BAT launchers and the graphics menu.
+- Updated illustrated player manuals and technical references in Spanish and English; the manuals use the MSX2 cover.
 
-**Installation:** download `donquijote-msx1-opl4-en-es-1.01.zip` and copy all files from `SD/` into one folder (the drive root under DOS1). Run `QUIJOTE` for Spanish or `QUIXOTE` for English. Press RETURN after the memory report, then start part one or enter the classic part-two password.
+**Installation:** download `donquijote-msx1-opl4-en-es-2.0.zip` and copy **all files from SD/** together. Under DOS2/Nextor, enter the game folder. Under DOS1, put the same files in the drive root. Run `QUIJOTE` for Spanish or `QUIXOTE` for English, choose `1` (MSX1) or `2` (MSX2), then press ENTER.
 
-**Updating from v1.0:** replace QUIJOTE.COM and QUIXOTE.COM. Existing voice and picture data can be kept; the complete bilingual package is also included.
+**Updating:** replace the complete package and remove the old `QUIJOTE.COM` and `QUIXOTE.COM` so DOS finds the BAT launchers. The four game programs are now `Q1ES.COM`, `Q1EN.COM`, `Q2ES.COM` and `Q2EN.COM`.
 
-Requires MSX1 or later, 512 KiB RAM in one compatible mapper, and OPL4 with 2 MiB sample RAM. Supports MSX-DOS 1 and MSX-DOS 2/Nextor. The current loader expects a MegaFlashROM SCC+ SD-style mapper arrangement; the new report distinguishes RAM not located by this loader from insufficient capacity.
+Requires MSX1 or later for option 1, MSX2 or later for option 2, 512 KiB RAM in one compatible mapper, OPL4 with 2 MiB sample RAM, and compatible MSX-DOS storage such as MegaFlashROM SCC+ SD or equivalent. Supports MSX-DOS 1 and MSX-DOS 2/Nextor.
 
-The automatic “Source code” archives contain build sources. Download the named bilingual ZIP to play.
+The ZIP includes both player manuals and both technical references in PDF/HTML. The automatic GitHub source archives contain build sources and require the separate original inputs described in `docs/BUILDING.md`.
 
 Original game: Dinamic Software, 1987. Unofficial adaptation and homage by DiHalt Studio, 2026. Original game elements belong to their respective holders.
