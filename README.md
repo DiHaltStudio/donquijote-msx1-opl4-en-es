@@ -31,6 +31,8 @@ Hardware: **MSX1 or later, 512 KiB mapper RAM, OPL4 with 2 MiB wave RAM**, and a
 
 Prepare Alonso Quijano for knighthood, explore La Mancha, and continue his journey towards Dulcinea. Read descriptions carefully and examine the objects around you.
 
+At startup, a memory report shows compatible mapper RAM, OPL4 sample RAM and RAM reserved for the game. Press RETURN to continue when the requirements are met. If a requirement is missing, the program explains the problem and returns to DOS. The game banks must belong to one compatible mapper; two separate 256 KiB mappers do not add up to the required 512 KiB.
+
 ## What is this?
 
 This edition keeps the original MSX adventure and illustrations. It adds OPL4 narration, replaces incremental drawing with picture blocks loaded from storage, links the two parts, and provides an English translation with English commands and a Northern British voice. Spanish narration uses a voice from Spain. Each language has its own executable; both support DOS1 and DOS2/Nextor.
@@ -53,7 +55,7 @@ python3 -m venv .venv
 # Put your two original TSX files in third_party/original/.
 make import-graphics RELEASE_DIR=/path/to/downloaded/package PYTHON=.venv/bin/python
 make PYTHON=.venv/bin/python
-make release PYTHON=.venv/bin/python VERSION=1.0
+make release PYTHON=.venv/bin/python VERSION=1.01
 ```
 
 Install **sjasm 0.42c** separately; `sjasmplus` is a different assembler. `make` creates `build/SD/`, and `make release` creates one bilingual ZIP. `make manual` rebuilds both PDF manuals with Tectonic. `make help` lists the targets. Downloaded packages run directly on the MSX; no source build is required to play.

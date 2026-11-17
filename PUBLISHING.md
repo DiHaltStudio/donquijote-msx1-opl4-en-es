@@ -20,10 +20,10 @@ before committing. Do not force-add those ignored directories.
 
 For the downloadable release:
 
-- Tag: `v1.0`.
-- Title: **Don Quijote / Don Quixote — MSX-DOS + OPL4 v1.0**.
+- Tag: `v1.01`.
+- Title: **Don Quijote / Don Quixote — MSX-DOS + OPL4 v1.01**.
 - Description: use `RELEASE-NOTES.md`.
-- Attach `release/donquijote-msx1-opl4-en-es-1.0.zip` and `release/SHA256SUMS`.
+- Attach `release/donquijote-msx1-opl4-en-es-1.01.zip` and `release/SHA256SUMS`.
 - Optionally attach the two PDFs from `docs/manual/` separately; they are also
   included in the ZIP.
 

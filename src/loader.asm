@@ -1,5 +1,6 @@
 ; One COM for DOS1 and DOS2/Nextor. Bank numbers 4..31 are logical; DOS2
 ; obtains their physical segments from ALL_SEG instead of occupying DOS RAM.
+ENGLISH equ 0
     org 0100h
     jp start
     jp disk_service           ; 0103h, called by the shared-bank trampoline
@@ -63,51 +64,29 @@ start:
     ld a,b
     or 088h
     ld (game_slot),a
-    ld h,040h
-    call 0024h
-    di
-    xor a
-    out (0FDh),a
-    ld a,(04000h)
-    ld (probe31),a
-    ld a,055h
-    ld (04000h),a
-    ld a,16
-    out (0FDh),a
-    ld a,(04000h)
-    ld (probe30),a
-    ld a,0AAh
-    ld (04000h),a
-    xor a
-    out (0FDh),a
-    ld a,(04000h)
-    cp 055h
-    ld a,0
-    jr nz,.probed
-    inc a
-.probed:
-    ld (probe_ok),a
-    ld a,16
-    out (0FDh),a
-    ld a,(probe30)
-    ld (04000h),a
-    xor a
-    out (0FDh),a
-    ld a,(probe31)
-    ld (04000h),a
-    call restore_page1
-    ld a,(probe_ok)
-    or a
-    jr nz,.mfr_found
+    call hw_probe_mapper
+    ld a,(hw_mapper_segments)
+    cp 32
+    jr z,.mfr_found
+    ld a,(hw_best_segments)
+    ld c,a
+    ld a,(hw_mapper_segments)
+    cp c
+    jr c,.not_mfr
+    ld (hw_best_segments),a
 .not_mfr:
     pop bc
     inc b
     ld a,b
     cp 4
     jr c,.find_mfr
+    ld a,(hw_best_segments)
+    ld (hw_mapper_segments),a
+    call hw_check
     jp failure
 .mfr_found:
     pop bc
+    call hw_check
     ld a,(dos_version)
     cp 2
     jp nc,allocate_dos2_segments
@@ -171,6 +150,8 @@ start:
     ld a,(cache_bank_count)
     cp 12
     jp nz,failure
+    ld a,28
+    ld (hw_reserved),a
     jp load_files
 
 init_dos2_mapper:
@@ -210,6 +191,8 @@ mapper_get3: jp 0
 mapper_put1: jp 0
 
 allocate_dos2_segments:
+    ld hl,hw_alloc_error
+    ld (hw_error),hl
     ld hl,bank_map+4
     ld a,4
 .next:
@@ -221,6 +204,9 @@ allocate_dos2_segments:
     jr c,.exhausted
     ld (hl),a
     inc hl
+    ld a,(hw_reserved)
+    inc a
+    ld (hw_reserved),a
     ld a,(alloc_logical)
     cp 20
     jr c,.advance
@@ -244,9 +230,12 @@ allocate_dos2_segments:
 .exhausted:
     ld a,(alloc_logical)
     cp 20
-    jp c,failure             ; sixteen mandatory segments, cache is optional
+    jp c,hw_alloc_failed     ; sixteen mandatory segments, cache is optional
 
 load_files:
+    call hw_ready
+    ld hl,hw_disk_error
+    ld (hw_error),hl
     ; Load immutable files to independent mapper banks.
     ld ix,load_table
 .file:
@@ -311,11 +300,13 @@ load_files:
     or (ix+1)
     jp nz,.file
     ld de,voice_fcb
+    ld (load_fcb),de
     ld c,00Fh
     call bdos
     or a
     jp nz,failure
     ld de,picture_fcb
+    ld (load_fcb),de
     ld c,00Fh
     call bdos
     or a
@@ -582,9 +573,28 @@ bdos:
     ret
 failure:
     call restore_page1
-    ld de,error_message
+    ld de,(hw_error)
     ld c,9
     call bdos
+    ld hl,(hw_error)
+    ld de,hw_disk_error
+    or a
+    sbc hl,de
+    jr nz,.return
+    ld hl,(load_fcb)
+    inc hl
+    ld b,11
+.name:
+    push bc
+    push hl
+    ld e,(hl)
+    ld c,2
+    call bdos
+    pop hl
+    pop bc
+    inc hl
+    djnz .name
+.return:
     ld sp,(dos_sp)
     jp 0
 
@@ -820,6 +830,8 @@ dos_tags:
     db 'QJ3DOS!!'
 tag_original: ds 32,0
 tag_remaining: db 0
+hw_best_segments: db 0
+    include "hardware.asm"
 trampoline_blob:
     incbin "../build/trampoline.bin"
 trampoline_end:

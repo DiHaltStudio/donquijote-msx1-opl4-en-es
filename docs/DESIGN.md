@@ -23,6 +23,16 @@ flowchart LR
   R --> M[Native MSX display]
 ```
 
+## Startup requirements report
+
+Before opening game resources, the loader probes up to 32 mapper segments of 16 KiB and 32 OPL4 pages of 64 KiB. It writes different tags to all addresses before reading them, so mirrored banks cannot appear as additional independent memory. Both Z80 probe bytes per segment are saved before writes and restored before returning to BIOS or DOS. This measures whether the required capacity is addressable; it is not an exhaustive cell test or a measurement of mapper capacity above 512 KiB.
+
+The report shows compatible mapper capacity, OPL4 sample RAM and RAM reserved for the game. OPL4 status polling is bounded so an absent or unresponsive interface cannot leave startup waiting indefinitely. If requirements are met, RETURN continues to the introduction. Otherwise the report explains the missing requirement and returns to DOS. Narration hardware is required for this edition.
+
+DOS2 reserves at least sixteen segments (256 KiB), plus an optional read cache. The game segments must belong to a single compatible mapper; they need not be consecutive. Separate 256 KiB mappers are not combined. DOS itself may use another mapper or internal RAM.
+
+The loader still searches the expanded-primary/secondary-2 arrangement described below. If none is found, it explicitly says that RAM may exist in another slot or interface. This distinction is useful when interpreting configurations involving FlashJacks or MSXVR: the report does not add a driver or change the supported mapper arrangement. File-open/read errors are separate from memory errors and name the requested data file.
+
 ## Storage and memory
 
 The runtime uses the FCB operations shared by DOS1 and DOS2. DOS1 reads the
